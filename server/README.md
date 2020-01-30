@@ -13,8 +13,6 @@ go to the package.json folder - in the script section, take out test and add the
     "start": "node ./node_modules/nodemon/bin/nodemon.js src/app.js --exec \"npm run lint && node\"",
     "lint": "./node_modules/.bin/eslint **/*.js"
 
-note: don't have to type out all of ./node_modules/nodemon/bin/nodemon.js (causes error in my case), just nodemon will work
-
 run this to initialize eslint:
 
 `node ./node_modules/eslint/bin/eslint.js --init`

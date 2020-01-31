@@ -13,11 +13,22 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
 const morgan = require("morgan");
+const history = require("connect-history-api-fallback");
 
 const app = express();
-app.use(morgan("combine"));
-app.use(bodyParser.json());
-app.use(cors());
+
+/** https://stackoverflow.com/questions/52327143/serving-vuejs-builds-via-express-js-using-history-mode */
+app
+  .use(morgan("combine"))
+  .use(bodyParser.json())
+  .use(cors())
+  .use(express.static(path.resolve(__dirname, "../client/dist")))
+  .use(
+    // Support history api
+    history({
+      index: "/dist/index.html"
+    })
+  );
 
 /*get request to status endpoint. If you go to /status in the browser you'll see the message in JSON format*/
 app.get("/status", (req, res) => {
@@ -29,7 +40,14 @@ app.get("/status", (req, res) => {
 /*home page: __dirname tells you the absolute path of the directory containing the executing file
 https://alligator.io/nodejs/how-to-use__dirname/*/
 app.get("/", (req, res) => {
-  res.render(path.resolve(__dirname, "../client/build/index.html"));
+  res.render(path.resolve(__dirname, "../client/dist/index.html"));
 });
 
-app.listen(PORT);
+/*All remaining requests get sent to the client side so it can handle routing TODO*/
+app.get("*", (req, res) => {
+  res.sendFile(path.resolve(__dirname, "../client/public", "index.html"));
+});
+
+app.listen(PORT, () => {
+  console.log("Server running on port ${PORT}");
+});

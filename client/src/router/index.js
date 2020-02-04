@@ -3,6 +3,7 @@ import Router from "vue-router";
 import HelloWorld from "@/components/HelloWorld";
 import SpotifyLogin from "@/components/SpotifyLogin";
 import Profile from "@/components/Profile";
+import { accessToken } from "@/services/spotifyApi";
 
 Vue.use(Router);
 // TODO change isAuthenticated
@@ -32,13 +33,18 @@ const router = new Router({
 });
 
 /**
- * Route guard
+ * Route guard, redirect all routes to login page if user isn't logged in
+ * https://router.vuejs.org/guide/advanced/navigation-guards.html#global-before-guards
  */
 router.beforeEach((to, from, next) => {
-  if (to.fullPath === "/") {
+  // statement to prevent infinite redirecting to login page if entry was from login
+  if (to.fullPath === '/spotifylogin') {
+    return next();
+  }
+  if (!accessToken) {
     return next("/spotifylogin");
   } else {
-    next();
+    return next();
   }
 });
 export default router;

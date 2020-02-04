@@ -10,14 +10,8 @@
 <script>
 /* import HellowWorld from "@/components/HelloWorld";
 import SpotifyLogin from "@/components/SpotifyLogin"; */
-
 export default {
-  name: 'App',
-  data () {
-    return {
-      accessToken: ''
-    }
-  }
+  name: 'App'
 }
 </script>
 

@@ -9,11 +9,11 @@ export const  getAccessToken = () => {
     }
     else{
         if (access_token){
-
+           return access_token;
         }
     }
 }
-
+export const accessToken = getAccessToken();
 // Spotify API calls--------------------------------------
 
 const headers = {

@@ -37,14 +37,14 @@ const router = new Router({
  * https://router.vuejs.org/guide/advanced/navigation-guards.html#global-before-guards
  */
 router.beforeEach((to, from, next) => {
-  // statement to prevent infinite redirecting to login page if entry was from login
+  // statement to prevent infinite redirecting to login page if entry was from login page
   if (to.fullPath === '/spotifylogin') {
-    return next();
+    if (accessToken) {
+      return next('/profile');
+    } else return next();
   }
   if (!accessToken) {
     return next("/spotifylogin");
-  } else {
-    return next();
-  }
+  } else return next();
 });
 export default router;

@@ -37,5 +37,7 @@ Library to do those http requests to the backend
 
 in src folder, make new folder called services
 
+## Access Tokens
+
 ## Application state
-the vue store manages the application's state.
+the vuxe store manages the application's state. It's for checking for the currently logged in user's information so that we don't have to check the locally stored access token repeatedly.

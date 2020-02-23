@@ -37,4 +37,5 @@ Library to do those http requests to the backend
 
 in src folder, make new folder called services
 
-
+## Application state
+the vue store manages the application's state.

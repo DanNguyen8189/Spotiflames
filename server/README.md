@@ -27,8 +27,7 @@ run
 reccomended application to test out backend: postman
 
 ## Environment variables
-They'll be located in the .env file
-Guide for using them: https://medium.com/the-node-js-collection/making-your-node-js-work-everywhere-with-environment-variables-2da8cdf6e786
+Guide for using them: https://medium.com/the-node-js-collection/making-your-node-js-work-everywhere-with-environment-variables-2da8cdf6e786. They'll be located in the .env file in the root directory
 
 ## Production 
 Note: environment variables in .env need to be altered

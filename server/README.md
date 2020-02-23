@@ -26,7 +26,11 @@ run
 
 reccomended application to test out backend: postman
 
+## Overview
+When the user clicks to submit login info on the client side, the app will send them to the server, which in turn requests authorization from spotify (/login). Afterwards, we go to /callback, which upon sucess gets the access and refresh tokens for the user. The access token is appended to the URL. 
+
 ## Environment variables
+These are used so that the client id and client secret are safely stored outside of github for security reasons.
 Guide for using them: https://medium.com/the-node-js-collection/making-your-node-js-work-everywhere-with-environment-variables-2da8cdf6e786. They'll be located in the .env file in the root directory
 
 ## Production 

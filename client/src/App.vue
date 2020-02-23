@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <img src="./assets/logo.png">
+    <!--<img src="./assets/logo.png">-->
     <!--<SpotifyLogin v-if='accessToken'/>
     <HelloWorld/>-->
     <router-view/>

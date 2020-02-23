@@ -27,6 +27,13 @@ const refreshAccessToken = async () => {
 };
 
 export const getAccessToken = () => {
+  /**
+   * TODO
+   * Do we want to do this instead?
+   *                     headers: {
+                        'Authorization': 'Bearer ' + this.$route.query.access_token
+                    }
+   */
   const { error, accessToken, refreshToken } = getHashParams();
 
   if (error) {

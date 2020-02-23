@@ -8,10 +8,13 @@
  * https://developer.spotify.com/documentation/general/guides/authorization-guide/
  * https://github.com/spotify/web-api-auth-examples/tree/master/authorization_code
  */
+
+//for reading environment variables from .env file
+require('dotenv').config();
+
 const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
-const morgan = require("morgan");
 const path = require("path");
 const history = require("connect-history-api-fallback");
 const request = require("request");
@@ -19,15 +22,20 @@ const querystring = require("querystring");
 const cookieParser = require("cookie-parser");
 
 const CLIENT_ID = process.env.CLIENT_ID;
+
 const CLIENT_SECRET = process.env.CLIENT_SECRET;
-let REDIRECT_URI = process.env.REDIRECT_URI || "http://localhost:8081/callback";
+
+// let REDIRECT_URI = process.env.REDIRECT_URI || "http://localhost:8081/callback";
+
+// remember to add redirect URIs to the spotify app through settings
+const REDIRECT_URI = "http://localhost:8081/callback";
 let FRONTEND_URI = process.env.FRONTEND_URI || "http://localhost:8080";
 const PORT = process.env.PORT || 8081;
 
-if (process.env.NODE_ENV !== "production") {
+/* if (process.env.NODE_ENV !== "production") {
   REDIRECT_URI = "http://localhost:8081/callback";
   FRONTEND_URI = "http://localhost:8080";
-}
+} */
 
 /**
  * Generates a random string containing numbers and letters
@@ -51,7 +59,6 @@ const app = express();
 
 /** https://stackoverflow.com/questions/52327143/serving-vuejs-builds-via-express-js-using-history-mode */
 app
-  .use(morgan("combine"))
   .use(bodyParser.json())
   .use(cors())
   // These commented out lines are causing the server to not work, look at later.
@@ -68,7 +75,7 @@ app
 /*get request to status endpoint. If you go to /status in the browser you'll see the message in JSON format*/
 app.get("/status", (req, res) => {
   res.send({
-    message: "hello world"
+    message: "Yep, server's on *thumbs up"
   });
 });
 

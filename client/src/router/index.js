@@ -1,9 +1,11 @@
 import Vue from "vue";
 import Router from "vue-router";
-import HelloWorld from "@/components/HelloWorld";
-import SpotifyLogin from "@/components/SpotifyLogin";
-import Profile from "@/components/Profile";
-import { accessToken } from "@/services/spotifyApi";
+
+import Home from "@/components/Home";
+// import HelloWorld from "@/components/HelloWorld";
+// import SpotifyLogin from "@/components/SpotifyLogin";
+// import Profile from "@/components/Profile";
+// import { accessToken } from "@/services/spotifyApi";
 
 Vue.use(Router);
 // TODO change isAuthenticated
@@ -15,11 +17,11 @@ const router = new Router({
     {
       path: "/",
       name: "Home",
-      component: HelloWorld
+      component: Home
       // redirect: "/spotifylogin"
       // beforeEnter: checkAuth()
-    },
-    {
+    }
+    /* {
       path: "/spotifylogin",
       name: "SpotifyLogin",
       component: SpotifyLogin
@@ -28,7 +30,7 @@ const router = new Router({
       path: "/profile",
       name: "Profile",
       component: Profile
-    }
+    } */
   ]
 });
 
@@ -36,15 +38,15 @@ const router = new Router({
  * Route guard, redirect all routes to login page if user isn't logged in
  * https://router.vuejs.org/guide/advanced/navigation-guards.html#global-before-guards
  */
-router.beforeEach((to, from, next) => {
+/* router.beforeEach((to, from, next) => {
   // statement to prevent infinite redirecting to login page if entry was from login page
   if (to.fullPath === '/spotifylogin') {
-    if (accessToken) {
+    if (this.$store.getters.getUser) {
       return next('/profile');
     } else return next();
   }
-  if (!accessToken) {
+  if (!this.$store.getters.getUser) {
     return next("/spotifylogin");
   } else return next();
-});
+}); */
 export default router;

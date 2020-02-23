@@ -4,7 +4,8 @@
       <div id="login">
         <h1>This is an example of the Authorization Code flow</h1>
         <!--<a href="/login" class="btn btn-primary">Log in with Spotify</a>-->
-        <button href="http://localhost:8081/login">Login</button>
+        <!--won't work with button for a server redirect, just <a> tag-->
+        <a href="http://localhost:8081/login">Login with Spotify</a>
       </div>
       <div id="loggedin">
         <div id="user-profile"></div>

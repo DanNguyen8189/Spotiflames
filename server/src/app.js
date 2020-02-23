@@ -22,20 +22,16 @@ const querystring = require("querystring");
 const cookieParser = require("cookie-parser");
 
 const CLIENT_ID = process.env.CLIENT_ID;
-
 const CLIENT_SECRET = process.env.CLIENT_SECRET;
-
-// let REDIRECT_URI = process.env.REDIRECT_URI || "http://localhost:8081/callback";
-
-// remember to add redirect URIs to the spotify app through settings
-const REDIRECT_URI = "http://localhost:8081/callback";
+// remember to add redirect URIs to the spotify app through settings or else a client error occurs
+let REDIRECT_URI = process.env.REDIRECT_URI || "http://localhost:8081/callback";
 let FRONTEND_URI = process.env.FRONTEND_URI || "http://localhost:8080";
 const PORT = process.env.PORT || 8081;
 
-/* if (process.env.NODE_ENV !== "production") {
+if (process.env.NODE_ENV !== "production") {
   REDIRECT_URI = "http://localhost:8081/callback";
   FRONTEND_URI = "http://localhost:8080";
-} */
+}
 
 /**
  * Generates a random string containing numbers and letters
@@ -61,10 +57,8 @@ const app = express();
 app
   .use(bodyParser.json())
   .use(cors())
-  // These commented out lines are causing the server to not work, look at later.
-  // .use(express.static(path.resolve(__dirname, "../client/dist")))
-  // .use(express.static(__dirname + '/public'))
-  .use(cookieParser());
+  .use(cookieParser())
+  .use(express.static(path.resolve(__dirname, "../client")));
   /*.use(
     // Support history api
     history({
@@ -85,9 +79,9 @@ https://alligator.io/nodejs/how-to-use__dirname/*/
 app.get("/login", function(req, res) {
   var state = generateRandomString(16);
   res.cookie(stateKey, state);
-
-  // your application requests authorization
-  var scope = "user-read-private user-read-email";
+  var scope = "user-read-private user-read-email"; // what kind of access you want
+  console.log("logging in");
+  // your application requests authorization, redirect to the spotify login page
   res.redirect(
     "https://accounts.spotify.com/authorize?" +
       querystring.stringify({
@@ -103,7 +97,7 @@ app.get("/login", function(req, res) {
 app.get("/callback", function(req, res) {
   // your application requests refresh and access tokens
   // after checking the state parameter
-
+  console.log("got to callback function");
   var code = req.query.code || null;
   var state = req.query.state || null;
   var storedState = req.cookies ? req.cookies[stateKey] : null;
@@ -147,23 +141,22 @@ app.get("/callback", function(req, res) {
         // use the access token to access the Spotify Web API
         request.get(options, function(error, response, body) {
           //the JSON data
+          console.log("request successful-returned api data:");
           console.log(body);
         });
 
-        // we can also pass the token to the browser to make requests from there
+        //pass the tokens to the browser to make requests from there
         res.redirect(
-          "/#" +
-            querystring.stringify({
-              access_token: access_token,
-              refresh_token: refresh_token
-            })
+          `${FRONTEND_URI}/#${querystring.stringify({
+            access_token,
+            refresh_token,
+          })}`,
         );
       } else {
         res.redirect(
-          "/#" +
-            querystring.stringify({
-              error: "invalid_token"
-            })
+          `/#${querystring.stringify({ 
+            error: 'invalid_token' 
+          })}`
         );
       }
     });

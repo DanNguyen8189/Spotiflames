@@ -2,16 +2,16 @@
     <div class='home'>
       <template v-if="this.user">
         <h1>Hey</h1>
-      <!--<h1>Hi there, {{ this.user.display_name }}</h1>-->
-      <!--<img :src="this.user.images[0].url" alt="profile_picture" class="profile_pic">
-      <p>Email address: {{ this.user.email }}</p>
-      <p>
-        <a :href="this.user.external_urls.spotify">Link to your profile</a>
-      </p>
-      <p>Number of followers: {{ this.user.followers.total }}</p>
-      <p>
-        <button v-on:click="logOut()" class="btn btn-primary">Log out</button>
-      </p>-->
+        <h1>Hi there, {{ this.user.display_name }}</h1>
+        <img :src="this.user.images[0].url" alt="profile_picture" class="profile_pic">
+        <p>Email address: {{ this.user.email }}</p>
+        <p>
+          <a :href="this.user.external_urls.spotify">Link to your profile</a>
+        </p>
+        <p>Number of followers: {{ this.user.followers.total }}</p>
+        <p>
+          <button v-on:click="logOut()" class="btn btn-primary">Log out</button>
+        </p>
       </template>
       <template v-else>
         <h1>Log in to Spotify using Authorization Code flow</h1>
@@ -42,7 +42,9 @@ export default {
     }
   },
   created () {
-    if (this.$route.query) {
+    console.log("Home on create");
+    if (this.$route.query.access_token) {
+      console.log("found tokens");
       Vue.axios.get('https://api.spotify.com/v1/me', {
         headers: {
           'Authorization': 'Bearer ' + this.$route.query.access_token,

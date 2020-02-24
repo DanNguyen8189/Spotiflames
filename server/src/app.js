@@ -17,7 +17,7 @@ const bodyParser = require("body-parser");
 const cors = require("cors");
 const path = require("path");
 const history = require("connect-history-api-fallback");
-const request = require("request");
+const request = require("request"); // request library
 const querystring = require("querystring");
 const cookieParser = require("cookie-parser");
 

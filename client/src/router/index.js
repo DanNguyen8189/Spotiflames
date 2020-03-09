@@ -12,7 +12,7 @@ Vue.use(Router);
 // const isAuthenticated = false;
 const router = new Router({
   // TODO mode
-  // mode: 'history',
+  mode: 'history',
   routes: [
     {
       path: "/",

@@ -22,7 +22,9 @@
 
 <script>
 // import { getUser } from "../services/spotifyApi.js";
-import Vue from 'vue';
+// import Vue from 'vue';
+import axios from "axios";
+// import { access_token } from "../services/spotifyApi";
 export default {
   name: 'Home',
   data () {
@@ -43,11 +45,21 @@ export default {
   },
   created () {
     console.log("Home on create");
-    if (this.$route.query.access_token) {
+    if (this.$route.query) {
       console.log("found tokens");
-      Vue.axios.get('https://api.spotify.com/v1/me', {
+      // get access and refresh tokens from url
+      const hashParams = {};
+      let e;
+      const r = /([^&;=]+)=?([^&;]*)/g;
+      const q = window.location.hash.substring(1);
+      while ((e = r.exec(q))) {
+        hashParams[e[1]] = decodeURIComponent(e[2]);
+      }
+      console.log(hashParams.access_token);
+
+      axios.get('https://api.spotify.com/v1/me', {
         headers: {
-          'Authorization': 'Bearer ' + this.$route.query.access_token,
+          'Authorization': 'Bearer ' + hashParams.access_token,
           'Content-Type': 'application/json'
         }
       }).then((response) => {

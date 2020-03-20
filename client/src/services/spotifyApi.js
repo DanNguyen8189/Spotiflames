@@ -26,6 +26,7 @@ const refreshAccessToken = async () => {
   }
 };
 
+// called on app start
 export const getAccessToken = () => {
   /**
    * TODO
@@ -34,8 +35,23 @@ export const getAccessToken = () => {
                         'Authorization': 'Bearer ' + this.$route.query.access_token
                     }
    */
-  const { error, accessToken, refreshToken } = getHashParams();
+  console.log("getAccessToken called");
+  /* window.localStorage.removeItem('spotify_token_timestamp');
+  window.localStorage.removeItem('spotify_access_token');
+  window.localStorage.removeItem('spotify_refresh_token');
+  return; */
+  // const { error, accessToken, refreshToken } = getHashParams();
+  // TODO not too sure about this
+  const hashParams = getHashParams();
+  const error = hashParams.error;
+  const accessToken = hashParams.access_token;
+  const refreshToken = hashParams.refresh_token;
+  console.log("get hashparams return: " + hashParams.access_token);
 
+  /* if (hashParams.access_token === undefined || !getLocalAccessToken()) {
+    console.log("user hasn't logged in");
+    return;
+  } */
   if (error) {
     console.error(error);
     refreshAccessToken();
@@ -63,11 +79,21 @@ export const getAccessToken = () => {
 
   return localAccessToken;
 }
-export const accessToken = getAccessToken();
+export const token = getAccessToken();
+
+export const logout = () => {
+  console.log("removing tokens from local storage");
+  window.localStorage.removeItem('spotify_token_timestamp');
+  window.localStorage.removeItem('spotify_access_token');
+  window.localStorage.removeItem('spotify_refresh_token');
+  // line below caused error during logout
+  // window.location.reload();
+};
+
 // Spotify API calls--------------------------------------
 
 const headers = {
-  Authorization: `Bearer ${accessToken}`,
+  Authorization: `Bearer ${token}`,
   'Content-Type': 'application/json'
 };
 
@@ -75,7 +101,11 @@ const headers = {
  * Get Current User's Profile
  * https://developer.spotify.com/documentation/web-api/reference/users-profile/get-current-users-profile/
  */
-export const getUser = () => axios.get('https://api.spotify.com/v1/me', { headers });
+// export const getUser = () => axios.get('https://api.spotify.com/v1/me', { headers });
+export const getUser = () => {
+  console.log(headers);
+  axios.get('https://api.spotify.com/v1/me', { headers });
+}
 
 /**
  * Get User's Followed Artists

@@ -35,8 +35,8 @@ export const getAccessToken = () => {
                         'Authorization': 'Bearer ' + this.$route.query.access_token
                     }
    */
-  console.log("getAccessToken called");
-  /* window.localStorage.removeItem('spotify_token_timestamp');
+  /* console.log("getAccessToken called");
+  window.localStorage.removeItem('spotify_token_timestamp');
   window.localStorage.removeItem('spotify_access_token');
   window.localStorage.removeItem('spotify_refresh_token');
   return; */
@@ -104,7 +104,7 @@ const headers = {
 // export const getUser = () => axios.get('https://api.spotify.com/v1/me', { headers });
 export const getUser = () => {
   console.log(headers);
-  axios.get('https://api.spotify.com/v1/me', { headers });
+  return axios.get('https://api.spotify.com/v1/me', { headers });
 }
 
 /**

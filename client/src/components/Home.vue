@@ -21,9 +21,22 @@
 </template>
 
 <script>
-import axios from "axios";
+// import axios from "axios";
 // import { access_token } from "../services/spotifyApi";
-import { getAccessToken, getUser, logout as removeTokens } from "../services/spotifyApi";
+import { getUser, logout as removeTokens } from "../services/spotifyApi";
+
+/* const getUserData = async () => {
+  try {
+    const { response } = await getUser();
+    console.log("getUserData response: " + response);
+    this.$store.commit('setUser', response.data);
+    console.log('Response from server: ');
+    console.log(this.$store.state.user);
+  } catch (ex) {
+    console.log(ex);
+  }
+}; */
+
 export default {
   name: 'Home',
   data () {
@@ -43,11 +56,20 @@ export default {
       // console.log("removed tokens");
       window.alert("logged out");
       this.$router.push({name: 'Home'});
+    },
+    getUserInfo () {
+      getUser().then((response) => {
+        console.log("HOLD UP");
+        console.log(this.$store.state.user);
+        console.log(response.data);
+        this.$store.commit('setUser', response.data);
+        console.log('Response from server: ');
+        console.log(this.$store.state.user);
+      });
     }
   },
   created () {
     console.log("Home on create hook");
-
     // Look and see if there's an access token in the url, if there is then the user logged in
     const hashParams = {};
     let e;
@@ -60,16 +82,21 @@ export default {
       console.log("found tokens");
       // get access and refresh tokens from url
       console.log("access token found in home.vue: " + hashParams.access_token);
-      axios.get('https://api.spotify.com/v1/me', {
+      /* axios.get('https://api.spotify.com/v1/me', {
         headers: {
           'Authorization': 'Bearer ' + hashParams.access_token,
           'Content-Type': 'application/json'
         }
       }).then((response) => {
+        console.log("OOF");
+        console.log(this.$store.state.user);
         this.$store.commit('setUser', response.data);
+        console.log(response.data);
         console.log('Response from server: ');
         console.log(this.$store.state.user);
-      });
+      }); */
+      // getUserData();
+      this.getUserInfo();
     }
   }
   // get user information

@@ -23,7 +23,7 @@
 <script>
 // import axios from "axios";
 // import { access_token } from "../services/spotifyApi";
-import { getUser, logout as removeTokens, getTopArtistsShort, getFollowing, getUserInfo } from "../services/spotifyApi";
+import { logout as removeTokens, getUserInfo } from "../services/spotifyApi";
 // import { getTopArtistsShort, getTopeArtistsMedium, getTopArtistsLong } from "../services/spotifyApi";
 
 export default {
@@ -48,15 +48,15 @@ export default {
       // this.$router.go();
     },
     getUserInfo2 () {
-      getUser().then((response) => {
+      getUserInfo().then((response) => {
         console.log("HOLD UP");
-        console.log(response.data);
-        this.$store.commit('setUser', response.data);
-        console.log('Response from server: ');
-        // console.log(this.$store.state.user);
+        console.log(response);
+        // this.$store.commit('setUser', response.user);
+        this.$store.commit('setUserArtistsTracks', response);
+        console.log(this.$store.state.topTracksShort);
       });
-    },
-    getTopArtistsShort2 () {
+    }
+    /* getTopArtistsShort2 () {
       console.log("what the fuck");
       getTopArtistsShort().then((response) => {
         // this.$store.commit('setArtistsShort', response.data);
@@ -64,7 +64,7 @@ export default {
         console.log(response.data);
         console.log(this.$store.state.topArtistsShort);
       });
-    }
+    } */
   },
   created () {
     console.log("Home on create hook");
@@ -95,7 +95,7 @@ export default {
       }); */
       // getUserData();
       this.getUserInfo2();
-      this.getTopArtistsShort2();
+      // this.getTopArtistsShort2();
     }
   }
   // get user information

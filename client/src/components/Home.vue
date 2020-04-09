@@ -1,21 +1,21 @@
 <template>
     <div class='home'>
       <template v-if="this.user">
-        <h1>Hey</h1>
         <h1>Hi there, {{ this.user.display_name }}</h1>
         <img :src="this.user.images[0].url" alt="profile_picture" class="profile_pic">
-        <p>Email address: {{ this.user.email }}</p>
+        <!--<p>Email address: {{ this.user.email }}</p>-->
         <p>
           <a :href="this.user.external_urls.spotify">Link to your profile</a>
         </p>
         <p>Number of followers: {{ this.user.followers.total }}</p>
         <p>
-          <button v-on:click="logOut()" class="btn btn-primary">Log out</button>
+          <a v-on:click="logOut()" class="btn btn-primary">Log out</a>
         </p>
       </template>
       <template v-else>
-        <h1>Log in to Spotify using Authorization Code flow</h1>
-        <a href="http://localhost:8081/login" class="btn btn-primary">Log in with Spotify</a><br>
+        <h1>Spotifire</h1>
+        <a href="http://localhost:8081/login" class="btn btn-primary">LOG IN WITH SPOTIFY</a><br>
+        <a href=# class="btn btn-primary">VIEW SAMPLE</a>>
       </template>
     </div>
 </template>
@@ -23,19 +23,8 @@
 <script>
 // import axios from "axios";
 // import { access_token } from "../services/spotifyApi";
-import { getUser, logout as removeTokens } from "../services/spotifyApi";
-
-/* const getUserData = async () => {
-  try {
-    const { response } = await getUser();
-    console.log("getUserData response: " + response);
-    this.$store.commit('setUser', response.data);
-    console.log('Response from server: ');
-    console.log(this.$store.state.user);
-  } catch (ex) {
-    console.log(ex);
-  }
-}; */
+import { getUser, logout as removeTokens, getTopArtistsShort, getFollowing, getUserInfo } from "../services/spotifyApi";
+// import { getTopArtistsShort, getTopeArtistsMedium, getTopArtistsLong } from "../services/spotifyApi";
 
 export default {
   name: 'Home',
@@ -56,15 +45,24 @@ export default {
       // console.log("removed tokens");
       window.alert("logged out");
       this.$router.push({name: 'Home'});
+      // this.$router.go();
     },
-    getUserInfo () {
+    getUserInfo2 () {
       getUser().then((response) => {
         console.log("HOLD UP");
-        console.log(this.$store.state.user);
         console.log(response.data);
         this.$store.commit('setUser', response.data);
         console.log('Response from server: ');
-        console.log(this.$store.state.user);
+        // console.log(this.$store.state.user);
+      });
+    },
+    getTopArtistsShort2 () {
+      console.log("what the fuck");
+      getTopArtistsShort().then((response) => {
+        // this.$store.commit('setArtistsShort', response.data);
+        console.log("topartistsshort:");
+        console.log(response.data);
+        console.log(this.$store.state.topArtistsShort);
       });
     }
   },
@@ -96,7 +94,8 @@ export default {
         console.log(this.$store.state.user);
       }); */
       // getUserData();
-      this.getUserInfo();
+      this.getUserInfo2();
+      this.getTopArtistsShort2();
     }
   }
   // get user information
@@ -109,3 +108,31 @@ export default {
   } */
 }
 </script>
+
+<style scoped>
+img {
+  border-radius: 50%;
+  width: 15%;
+}
+h1 {
+  color: #fcd02c;
+}
+a {
+  min-width: 160px;
+  width: 20em;
+  height: 4em;
+  border-radius: 2em;
+  background-color: #e56b1f;
+  display: block;
+  color: white;
+  text-decoration: none;
+  letter-spacing: 2px;
+  font-weight: 700;
+  line-height: 4em;
+  margin: auto;
+  margin-bottom: 1em;
+}
+a:focus, a:hover {
+  background-color: #ff741e;
+}
+</style>>

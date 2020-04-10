@@ -168,7 +168,7 @@ export const getTopArtists = () => {
         return {
           topArtistsShort: topArtistsShort.data,
           topArtistsMedium: topArtistsMedium.data,
-          topArtistsLong: topArtistsLong.data,
+          topArtistsLong: topArtistsLong.data
         };
       })
     );

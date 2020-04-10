@@ -6,6 +6,7 @@ import Home from "@/components/Home";
 // import SpotifyLogin from "@/components/SpotifyLogin";
 // import Profile from "@/components/Profile";
 // import { accessToken } from "@/services/spotifyApi";
+import TopArtists from "@/components/TopArtists";
 
 Vue.use(Router);
 // TODO change isAuthenticated
@@ -20,6 +21,11 @@ const router = new Router({
       component: Home
       // redirect: "/spotifylogin"
       // beforeEnter: checkAuth()
+    },
+    {
+      path: "/topartists",
+      name: "TopArtists",
+      component: TopArtists
     }
     /* {
       path: "/spotifylogin",

@@ -10,6 +10,7 @@
         <p>Number of followers: {{ this.user.followers.total }}</p>
         <p>
           <a v-on:click="logOut()" class="btn btn-primary">Log out</a>
+          <a v-on:click="goTopArtists()">ACK</a>
         </p>
       </template>
       <template v-else>
@@ -23,7 +24,7 @@
 <script>
 // import axios from "axios";
 // import { access_token } from "../services/spotifyApi";
-import { logout as removeTokens, getUserInfo } from "../services/spotifyApi";
+import { logout as removeTokens, getUser } from "../services/spotifyApi";
 // import { getTopArtistsShort, getTopeArtistsMedium, getTopArtistsLong } from "../services/spotifyApi";
 
 export default {
@@ -47,14 +48,14 @@ export default {
       this.$router.push({name: 'Home'});
       // this.$router.go();
     },
-    getUserInfo2 () {
-      getUserInfo().then((response) => {
-        console.log("HOLD UP");
-        console.log(response);
+    getUserInfo () {
+      getUser().then((response) => {
         // this.$store.commit('setUser', response.user);
-        this.$store.commit('setUserArtistsTracks', response);
-        console.log(this.$store.state.topTracksShort);
+        this.$store.commit('setUser', response.data);
       });
+    },
+    goTopArtists () {
+      this.$router.push('/topartists')
     }
     /* getTopArtistsShort2 () {
       console.log("what the fuck");
@@ -94,7 +95,7 @@ export default {
         console.log(this.$store.state.user);
       }); */
       // getUserData();
-      this.getUserInfo2();
+      this.getUserInfo();
       // this.getTopArtistsShort2();
     }
   }

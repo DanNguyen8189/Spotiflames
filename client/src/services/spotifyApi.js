@@ -106,12 +106,6 @@ export const getUser = () =>
   axios.get('https://api.spotify.com/v1/me', { headers });
 
 /**
- * Get User's Followed Artists
- * https://developer.spotify.com/documentation/web-api/reference/follow/get-followed/
- */
-export const getFollowing = () =>
-  axios.get('https://api.spotify.com/v1/me/following?type=artist', { headers });
-/**
  * Get Current User's Recently Played Tracks
  * https://developer.spotify.com/documentation/web-api/reference/player/get-recently-played/
  */
@@ -128,7 +122,7 @@ export const getPlaylists = () => axios.get('https://api.spotify.com/v1/me/playl
  * Get a User's Top Artists
  * https://developer.spotify.com/documentation/web-api/reference/personalization/get-users-top-artists-and-tracks/
  */
-export const getTopArtistsShort = () => 
+export const getTopArtistsShort = () =>
   axios.get('https://api.spotify.com/v1/me/top/artists?time_range=short_term&limit=50', { headers });
 export const getTopArtistsMedium = () =>
   axios.get('https://api.spotify.com/v1/me/top/artists?limit=50&time_range=medium_term', { headers });
@@ -148,10 +142,10 @@ export const getTopTracksLong = () =>
 
 export const getUserInfo = () => {
   return axios
-    .all([getUser(), getTopArtistsShort(), getTopArtistsMedium(), getTopArtistsLong(), 
+    .all([getUser(), getTopArtistsShort(), getTopArtistsMedium(), getTopArtistsLong(),
       getTopTracksShort(), getTopTracksMedium(), getTopTracksLong()])
     .then(
-      axios.spread((user, topArtistsShort, topArtistsMedium, topArtistsLong, 
+      axios.spread((user, topArtistsShort, topArtistsMedium, topArtistsLong,
         topTracksShort, topTracksMedium, topTracksLong) => {
         return {
           user: user.data,
@@ -160,8 +154,22 @@ export const getUserInfo = () => {
           topArtistsLong: topArtistsLong.data,
           topTracksShort: topTracksShort.data,
           topTracksMedium: topTracksMedium.data,
-          topTracksLong: topTracksLong.data,
+          topTracksLong: topTracksLong.data
         };
-      }),
+      })
+    );
+};
+
+export const getTopArtists = () => {
+  return axios
+    .all([getTopArtistsShort(), getTopArtistsMedium(), getTopArtistsLong()])
+    .then(
+      axios.spread((topArtistsShort, topArtistsMedium, topArtistsLong) => {
+        return {
+          topArtistsShort: topArtistsShort.data,
+          topArtistsMedium: topArtistsMedium.data,
+          topArtistsLong: topArtistsLong.data,
+        };
+      })
     );
 };

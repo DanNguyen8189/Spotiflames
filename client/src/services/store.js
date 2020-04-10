@@ -35,11 +35,12 @@ export default new Vuex.Store({
     setTopTracksLong (state, tracks) {
       state.topTracksLong = tracks;
     },
-    setUserArtistsTracks (state, data) {
-      state.user = data.user;
+    setTopArtists (state, data) {
       state.topArtistsShort = data.topArtistsShort;
       state.topArtistsMedium = data.topArtistsMedium;
       state.topArtistsLong = data.topArtistsLong;
+    },
+    setTopTracks (state, data) {
       state.topTracksShort = data.topTracksShort;
       state.topTracksMedium = data.topTracksMedium;
       state.topTracksLong = data.topTracksLong;

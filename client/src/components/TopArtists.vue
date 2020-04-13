@@ -3,12 +3,14 @@
       <template v-if="this.userArtistsShort">
         <h1>Top Artists</h1>
       <!--<img :src="this.user.images[0].url" alt="profile_picture" class="profile_pic">-->
-        <img :src="this.userArtistsShort.items[0].images[2].url" alt="artist_picture">
+        <!--<img :src="this.userArtistsShort.items[0].images[2].url" alt="artist_picture">-->
         <div v-for="n in 10" :key="n">
           <!--<img v-bind:src="`this.userArtistsShort.items[0].images[2].url`">-->
           <!--<img src="https://i.scdn.co/image/15616ceb5c8c7e88aa07cb2f406a2b722a36fcd0">-->
           <!--<img :src="this.userArtistsShort.items[0].images[2].url" alt="artist_picture">-->
           <!--<img :src="this.$store.state.topArtistsShort.items[0].images[2].url" alt="artist_picture">-->
+          <img :src=getImage(n-1)>
+          <div>{{ getName(n-1) }}</div>
         </div>
       </template>
       <template v-else>
@@ -47,6 +49,12 @@ export default {
         console.log("INFO:");
         console.log(this.$store.state.topArtistsShort);
       });
+    },
+    getImage (index) {
+      return this.$store.getters.getTopArtistsShort.items[index].images[2].url;
+    },
+    getName (index) {
+      return this.$store.getters.getTopArtistsShort.items[index].name;
     }
   },
   created () {

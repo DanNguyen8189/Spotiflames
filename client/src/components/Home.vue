@@ -40,6 +40,7 @@ export default {
     }
   },
   methods: {
+    /** logs user out by removing them from the store and removing the locally stored tokens */
     logOut () {
       this.$store.commit('setUser', null);
       removeTokens();
@@ -48,6 +49,7 @@ export default {
       this.$router.push({name: 'Home'});
       // this.$router.go();
     },
+    /** Calls the getUser method from spotifyApi.js */
     getUserInfo () {
       getUser().then((response) => {
         // this.$store.commit('setUser', response.user);
@@ -81,6 +83,7 @@ export default {
       console.log("found tokens");
       // get access and refresh tokens from url
       console.log("access token found in home.vue: " + hashParams.access_token);
+      console.log("refresh token found in home.vue: " + hashParams.refresh_token);
       /* axios.get('https://api.spotify.com/v1/me', {
         headers: {
           'Authorization': 'Bearer ' + hashParams.access_token,

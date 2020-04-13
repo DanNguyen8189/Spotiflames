@@ -15,9 +15,19 @@ const getLocalRefreshToken = () => window.localStorage.getItem('spotify_refresh_
 
 // Refresh the token
 const refreshAccessToken = async () => {
+  console.log("refresh token: ");
+  console.log(getLocalRefreshToken());
   try {
-    const { data } = await axios.get(`/refresh_token?refresh_token=${getLocalRefreshToken()}`);
+    console.log("OOOOF");
+    axios.get('http://localhost8081/status').then(response => {
+      console.log(response);
+    }).catch(error => console.log("yikes mate " + error));
+
+    // console.log("what the fuuuuuuuuck?: "+ash);
+    const { data } = await axios.get(`https://localhost8081/refresh_token?refresh_token=${getLocalRefreshToken()}`);
+    // const { data } = await axios.get(`/refresh_token?refresh_token=${getLocalRefreshToken()}`);
     const { accessToken } = data;
+    console.log("Acces token gotten from refresh: " + accessToken);
     setLocalAccessToken(accessToken);
     window.location.reload();
     return;
@@ -111,12 +121,6 @@ export const getUser = () =>
  */
 export const getRecentlyPlayed = () =>
   axios.get('https://api.spotify.com/v1/me/player/recently-played', { headers });
-
-/**
- * Get a List of Current User's Playlists
- * https://developer.spotify.com/documentation/web-api/reference/playlists/get-a-list-of-current-users-playlists/
- */
-export const getPlaylists = () => axios.get('https://api.spotify.com/v1/me/playlists', { headers });
 
 /**
  * Get a User's Top Artists

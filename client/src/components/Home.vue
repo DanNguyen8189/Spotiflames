@@ -10,7 +10,8 @@
         <p>Number of followers: {{ this.user.followers.total }}</p>
         <p>
           <a v-on:click="logOut()" class="btn btn-primary">Log out</a>
-          <a v-on:click="goTopArtists()">ACK</a>
+          <a v-on:click="goTopArtists()">Top artists</a>
+          <a v-on:click="goTopTracks()">Top tracks</a>
         </p>
       </template>
       <template v-else>
@@ -58,6 +59,9 @@ export default {
     },
     goTopArtists () {
       this.$router.push('/topartists')
+    },
+    goTopTracks () {
+      this.$router.push('/toptracks')
     }
     /* getTopArtistsShort2 () {
       console.log("what the fuck");

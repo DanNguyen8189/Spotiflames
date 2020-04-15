@@ -177,3 +177,17 @@ export const getTopArtists = () => {
       })
     );
 };
+
+export const getTopTracks = () => {
+  return axios
+    .all([getTopTracksShort(), getTopTracksMedium(), getTopTracksLong()])
+    .then(
+      axios.spread((topTracksShort, topTracksMedium, topTracksLong) => {
+        return {
+          topTracksShort: topTracksShort.data,
+          topTracksMedium: topTracksMedium.data,
+          topTracksLong: topTracksLong.data
+        };
+      })
+    );
+};

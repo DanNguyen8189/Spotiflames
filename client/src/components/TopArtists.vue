@@ -6,8 +6,7 @@
       <button v-on:click="page_state = 'medium'">Past 6 Months</button>
       <button v-on:click="page_state = 'long'">Ever</button>
       </div>
-      <template v-if="this.userArtistsShort">
-        
+      <template v-if="this.userArtistsShort">    
       <!--<img :src="this.user.images[0].url" alt="profile_picture" class="profile_pic">-->
         <!--<img :src="this.userArtistsShort.items[0].images[2].url" alt="artist_picture">-->
         <div v-for="n in 20" :key="n" class="list">
@@ -15,7 +14,6 @@
           <!--<img src="https://i.scdn.co/image/6c785e6be62ae82a5222578045439fc235086f64">-->
           <!--<img :src="this.userArtistsShort.items[0].images[2].url" alt="artist_picture">-->
           <!--<img :src="this.$store.state.topArtistsShort.items[0].images[2].url" alt="artist_picture">-->
-          
           <img :src=getImage(n-1)>
           <div class='artist-text'>{{ getName(n-1) }}</div>
         </div>

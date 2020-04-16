@@ -2,11 +2,11 @@
     <div class='topartists'>
       <h1>Top Artists</h1>
       <div id = "top">
-      <button v-on:click="page_state = 'short'">Past Month</button>
-      <button v-on:click="page_state = 'medium'">Past 6 Months</button>
-      <button v-on:click="page_state = 'long'">Ever</button>
+        <button v-on:click="changeTimePeriod('short')">Past Month</button>
+        <button v-on:click="changeTimePeriod('medium')">Past 6 Months</button>
+        <button v-on:click="changeTimePeriod('long')">Ever</button>
       </div>
-      <template v-if="this.userArtistsShort">    
+      <template v-if="this.userArtistsShort">
       <!--<img :src="this.user.images[0].url" alt="profile_picture" class="profile_pic">-->
         <!--<img :src="this.userArtistsShort.items[0].images[2].url" alt="artist_picture">-->
         <div v-for="n in 20" :key="n" class="list">
@@ -30,8 +30,7 @@ export default {
   name: 'TopArtists',
   data () {
     return {
-      msg: 'Top artists page',
-      page_state: 'short'
+      msg: 'Top artists page'
     }
   },
   // might not need this
@@ -47,37 +46,26 @@ export default {
     }
   },
   methods: {
+    /** function to get the top artists and set them to the vuex store. Response from Spotify is in JSON format*/
     getTopArtists2 () {
       getTopArtists().then((response) => {
-        // this.$store.commit('setUser', response.user);
         console.log("artists response data:");
         console.log(response)
         this.$store.commit('setTopArtists', response);
-        console.log("INFO:");
-        console.log(this.$store.state.topArtistsShort);
+        this.$store.commit('setTimePeriod', 'short');
       });
     },
-    // get artist image based on the page state
-    getImage (index) {
-      switch (this.page_state) {
-        case 'short':
-          return this.$store.getters.getTopArtistsShort.items[index].images[2].url;
-        case 'medium':
-          return this.$store.getters.getTopArtistsMedium.items[index].images[2].url;
-        case 'long':
-          return this.$store.getters.getTopArtistsLong.items[index].images[2].url;
-      }
+    /** change the time period to display */
+    changeTimePeriod (state) {
+      this.$store.commit('setTimePeriod', state);
     },
-    // get artist name base on the page state
+    /** get artist image based on the page state */
+    getImage (index) {
+      return this.$store.getters.getTopArtists.items[index].images[2].url;
+    },
+    /** get artist name base on the page state */
     getName (index) {
-      switch (this.page_state) {
-        case 'short':
-          return this.$store.getters.getTopArtistsShort.items[index].name;
-        case 'medium':
-          return this.$store.getters.getTopArtistsMedium.items[index].name;
-        case 'long':
-          return this.$store.getters.getTopArtistsLong.items[index].name;
-      }
+      return this.$store.getters.getTopArtists.items[index].name;
     }
   },
   created () {

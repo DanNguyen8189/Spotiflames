@@ -2,19 +2,19 @@
   <div class='topartists'>
   <h1>Top Tracks</h1>
     <div id = "top">
-    <button v-on:click="page_state = 'short'">Past Month</button>
-    <button v-on:click="page_state = 'medium'">Past 6 Months</button>
-    <button v-on:click="page_state = 'long'">All Time</button>
+        <button v-on:click="changeTimePeriod('short')">Past Month</button>
+        <button v-on:click="changeTimePeriod('medium')">Past 6 Months</button>
+        <button v-on:click="changeTimePeriod('long')">Ever</button>
     </div>
     <template v-if="this.userTracksShort">
       <div v-for="n in 20" :key="n" class="list">
-        <p>{{n-1}}</p>
+        <p>{{n}}</p>
         <img :src=getImage(n-1)>
         <div class='track-name'>{{ getTrackName(n-1) }}</div>
         <div class='artist-name'>{{ getArtistName(n-1) }}</div>
-        <button class="btn btn-primary btn-sm" 
+        <button class="btn btn-primary btn-sm"
         @click.prevent="playTrack(n-1)">
-        <span class="fa fa-play-circle-o"></span>
+        <span class="fa fa-play-circle-o">Arrow Placeholder</span>
         </button>
       </div>
     </template>
@@ -47,63 +47,37 @@ export default {
     }
   },
   methods: {
+    /** function to get the top tracks and set them to the vuex store. Response from Spotify is in JSON format*/
     getTopTracks2 () {
       getTopTracks().then((response) => {
         // this.$store.commit('setUser', response.user);
         console.log("Tracks response data:");
         console.log(response)
         this.$store.commit('setTopTracks', response);
-        console.log("INFO:");
-        console.log(this.$store.state.topTracksShort);
+        this.$store.commit('setTimePeriod', 'short');
       });
     },
-    // get artist image based on the page state
+    /** function to change the time period to display */
+    changeTimePeriod (state) {
+      this.$store.commit('setTimePeriod', state);
+    },
+    /** function to get album cover image based on the page state */
     getImage (index) {
-      switch (this.page_state) {
-        case 'short':
-          return this.$store.getters.getTopTracksShort.items[index].album.images[2].url;
-        case 'medium':
-          return this.$store.getters.getTopTracksMedium.items[index].album.images[2].url;
-        case 'long':
-          return this.$store.getters.getTopTracksLong.items[index].album.images[2].url;
-      }
+      return this.$store.getters.getTopTracks.items[index].album.images[2].url;
     },
-    // get artist name base on the page state
+    /** function get track name */
     getTrackName (index) {
-      switch (this.page_state) {
-        case 'short':
-          return this.$store.getters.getTopTracksShort.items[index].name;
-        case 'medium':
-          return this.$store.getters.getTopTracksMedium.items[index].name;
-        case 'long':
-          return this.$store.getters.getTopTracksLong.items[index].name;
-      }
+      return this.$store.getters.getTopTracks.items[index].name;
     },
+    /** funciton to get artist name */
     getArtistName (index) {
-      switch (this.page_state) {
-        case 'short':
-          return this.$store.getters.getTopTracksShort.items[index].artists[0].name;
-        case 'medium':
-          return this.$store.getters.getTopTracksMedium.items[index].artists[0].name;
-        case 'long':
-          return this.$store.getters.getTopTracksLong.items[index].artists[0].name;
-      }        
+      return this.$store.getters.getTopTracks.items[index].artists[0].name;
     },
+    /** TODO function to play currently selected track */
     playTrack (index) {
-      var link;
-      switch (this.page_state) {
-        case 'short':
-          link = this.$store.getters.getTopTracksShort.items[index].preview_url;
-          break;
-        case 'medium':
-          link = this.$store.getters.getTopTracksMedium.items[index].preview_url;
-          break;
-        case 'long':
-          link = this.$store.getters.getTopTracksLong.items[index].preview_url;
-          break;
-      }         
+      var link = this.$store.getters.getTopTracks.items[index].preview_url;
       var audio = new Audio(link)
-      audio.play(); 
+      audio.play();
     }
   },
   created () {
@@ -112,6 +86,9 @@ export default {
 }
 </script>
 <style scoped>
+h1 {
+  color: #ff741e;
+}
 .track-name {
     color: white;
 }

@@ -36,7 +36,7 @@ export default {
   data () {
     return {
       msg: 'Top tracks page',
-      activeTrack: 0,
+      activeTrack: -1,
       audioElement: null,
       status: STATUSES.STOPPED
     }
@@ -94,8 +94,13 @@ export default {
     },
     loadTrack (index) {
       if (this.audioElement) this.audioElement.pause();
+      if (this.activeTrack === index) {
+        this.activeTrack = -1;
+        return;
+      }
       this.audioElement = new Audio(this.$store.getters.getTopTracks.items[index].preview_url);
       this.status = STATUSES.STOPPED;
+      this.activeTrack = index;
       this.play();
     },
     play () {

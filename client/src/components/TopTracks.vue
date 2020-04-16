@@ -13,7 +13,7 @@
         <div class='track-name'>{{ getTrackName(n-1) }}</div>
         <div class='artist-name'>{{ getArtistName(n-1) }}</div>
         <button class="btn btn-primary btn-sm"
-        @click.prevent="playTrack(n-1)">
+        @click.prevent="loadTrack(n-1)">
         <span class="fa fa-play-circle-o">Arrow Placeholder</span>
         </button>
       </div>
@@ -26,12 +26,19 @@
 
 <script>
 import { getTopTracks } from "../services/spotifyApi";
+const STATUSES = {
+  'STOPPED': 0,
+  'PAUSED': 1,
+  'PLAYING': 2
+};
 export default {
   name: 'TopTracks',
   data () {
     return {
       msg: 'Top tracks page',
-      page_state: 'short'
+      activeTrack: 0,
+      audioElement: null,
+      status: STATUSES.STOPPED
     }
   },
   // might not need this
@@ -44,10 +51,16 @@ export default {
     },
     userTracksLong () {
       return this.$store.getters.topTracksLong
+    },
+    isPaused: function () {
+      return STATUSES.PAUSED === this.status;
+    },
+    isPlaying: function () {
+      return STATUSES.PLAYING === this.status;
     }
   },
   methods: {
-    /** function to get the top tracks and set them to the vuex store. Response from Spotify is in JSON format*/
+    /** function to get the top tracks and set them to the vuex store. Response from Spotify is in JSON format */
     getTopTracks2 () {
       getTopTracks().then((response) => {
         // this.$store.commit('setUser', response.user);
@@ -78,6 +91,20 @@ export default {
       var link = this.$store.getters.getTopTracks.items[index].preview_url;
       var audio = new Audio(link)
       audio.play();
+    },
+    loadTrack (index) {
+      if (this.audioElement) this.audioElement.pause();
+      this.audioElement = new Audio(this.$store.getters.getTopTracks.items[index].preview_url);
+      this.status = STATUSES.STOPPED;
+      this.play();
+    },
+    play () {
+      this.status = STATUSES.PLAYING;
+      this.audioElement.play();
+    },
+    pause () {
+      this.status = STATUSES.PAUSED;
+      this.audioElement.pause();
     }
   },
   created () {

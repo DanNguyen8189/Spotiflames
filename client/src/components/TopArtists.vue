@@ -46,7 +46,7 @@ export default {
     }
   },
   methods: {
-    /** function to get the top artists and set them to the vuex store. Response from Spotify is in JSON format*/
+    /** function to get the top artists and set them to the vuex store. Response from Spotify is in JSON format */
     getTopArtists2 () {
       getTopArtists().then((response) => {
         console.log("artists response data:");

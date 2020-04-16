@@ -13,7 +13,7 @@ export default new Vuex.Store({
     topArtistsLong: null, // list of top artists all time
     topTracksShort: null, // list of top tracks from the past month
     topTracksMedium: null, // list of top tracks from the past 6 months
-    topTracksLong: null, // list of top tracks all time
+    topTracksLong: null // list of top tracks all time
   },
   mutations: {
     setUser (state, user) {

@@ -7,15 +7,16 @@
         <button v-on:click="changeTimePeriod('long')">Ever</button>
     </div>
     <template v-if="this.userTracksShort">
-      <div v-for="n in 20" :key="n" class="list">
+      <div v-for="n in 50" :key="n" class="list">
         <p>{{n}}</p>
         <img :src=getImage(n-1)>
         <div class='track-name'>{{ getTrackName(n-1) }}</div>
         <div class='artist-name'>{{ getArtistName(n-1) }}</div>
-        <button class="btn btn-primary btn-sm"
-        @click.prevent="loadTrack(n-1)">
-        <span class="fa fa-play-circle-o">Arrow Placeholder</span>
+        <button v-if="getTrackURL(n-1) !== null" class="btn btn-primary btn-sm"
+          @click.prevent="playTrack(n-1)">
+          <span class="fa fa-play-circle-o">Arrow Placeholder</span>
         </button>
+        <button v-else class="btn btn-primary btn-sm">Preview not available</button>
       </div>
     </template>
     <template v-else>
@@ -26,19 +27,13 @@
 
 <script>
 import { getTopTracks } from "../services/spotifyApi";
-const STATUSES = {
-  'STOPPED': 0,
-  'PAUSED': 1,
-  'PLAYING': 2
-};
+
 export default {
   name: 'TopTracks',
   data () {
     return {
       msg: 'Top tracks page',
-      activeTrack: -1,
-      audioElement: null,
-      status: STATUSES.STOPPED
+      audioElement: null
     }
   },
   // might not need this
@@ -51,12 +46,6 @@ export default {
     },
     userTracksLong () {
       return this.$store.getters.topTracksLong
-    },
-    isPaused: function () {
-      return STATUSES.PAUSED === this.status;
-    },
-    isPlaying: function () {
-      return STATUSES.PLAYING === this.status;
     }
   },
   methods: {
@@ -86,30 +75,16 @@ export default {
     getArtistName (index) {
       return this.$store.getters.getTopTracks.items[index].artists[0].name;
     },
-    /** TODO function to play currently selected track */
+    getTrackURL (index) {
+      return this.$store.getters.getTopTracks.items[index].preview_url;
+    },
+    /** function to load currently selected track to play (and pause if it's the same as
+     * the currently playing track) */
     playTrack (index) {
-      var link = this.$store.getters.getTopTracks.items[index].preview_url;
-      var audio = new Audio(link)
-      audio.play();
-    },
-    loadTrack (index) {
       if (this.audioElement) this.audioElement.pause();
-      if (this.activeTrack === index) {
-        this.activeTrack = -1;
-        return;
-      }
-      this.audioElement = new Audio(this.$store.getters.getTopTracks.items[index].preview_url);
-      this.status = STATUSES.STOPPED;
-      this.activeTrack = index;
-      this.play();
-    },
-    play () {
-      this.status = STATUSES.PLAYING;
+      this.audioElement = new Audio(this.getTrackURL(index));
+      // this.audioElement.addEventListener('ended', this.stop());
       this.audioElement.play();
-    },
-    pause () {
-      this.status = STATUSES.PAUSED;
-      this.audioElement.pause();
     }
   },
   created () {

@@ -4,7 +4,7 @@
     <div id = "top">
         <button v-on:click="changeTimePeriod('short')">Past Month</button>
         <button v-on:click="changeTimePeriod('medium')">Past 6 Months</button>
-        <button v-on:click="changeTimePeriod('long')">Ever</button>
+        <button v-on:click="changeTimePeriod('long')">All Time</button>
     </div>
     <template v-if="this.userTracksShort">
       <div v-for="n in 50" :key="n" class="list">

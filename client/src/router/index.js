@@ -23,6 +23,11 @@ const router = new Router({
       // redirect: "/spotifylogin"
       // beforeEnter: checkAuth()
     },
+    /* {
+      path: "/:tokens",
+      name: "Home",
+      component: Home     
+    }, */
     {
       path: "/topartists",
       name: "TopArtists",
@@ -32,7 +37,12 @@ const router = new Router({
       path: "/toptracks",
       name: "TopTracks",
       component: TopTracks
-    }
+    },
+    {
+      path: "/:tokens",
+      name: "Home",
+      component: Home     
+    },
     /* {
       path: "/spotifylogin",
       name: "SpotifyLogin",

@@ -47,7 +47,7 @@ export default {
     },
         /** logs user out by removing them from the store and removing the locally stored tokens */
     logOut () {
-      this.$store.commit('setUser', null);
+      this.$store.commit('clearAll');
       removeTokens();
       // console.log("removed tokens");
       window.alert("logged out");

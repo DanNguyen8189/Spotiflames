@@ -74,7 +74,7 @@ export default {
     } */
   },
   created () {
-    console.log("Home on create hook");
+    /* console.log("Home on create hook");
     // Look and see if there's an access token in the url, if there is then the user logged in
     const hashParams = {};
     let e;
@@ -87,33 +87,10 @@ export default {
       console.log("found tokens");
       // get access and refresh tokens from url
       console.log("access token found in home.vue: " + hashParams.access_token);
-      console.log("refresh token found in home.vue: " + hashParams.refresh_token);
-      /* axios.get('https://api.spotify.com/v1/me', {
-        headers: {
-          'Authorization': 'Bearer ' + hashParams.access_token,
-          'Content-Type': 'application/json'
-        }
-      }).then((response) => {
-        console.log("OOF");
-        console.log(this.$store.state.user);
-        this.$store.commit('setUser', response.data);
-        console.log(response.data);
-        console.log('Response from server: ');
-        console.log(this.$store.state.user);
-      }); */
-      // getUserData();
+      console.log("refresh token found in home.vue: " + hashParams.refresh_token); */
       this.getUserInfo();
-      // this.getTopArtistsShort2();
-    }
+    // }
   }
-  // get user information
-  /*
-  created () {
-    if (this.$route.query){
-      const { data } = await getUser();
-      //TODO set data in the store
-    }
-  } */
 }
 </script>
 

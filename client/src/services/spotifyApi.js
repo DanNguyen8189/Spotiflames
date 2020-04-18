@@ -18,10 +18,10 @@ const refreshAccessToken = async () => {
   console.log("refresh token: ");
   console.log(getLocalRefreshToken());
   try {
-    console.log("OOOOF");
+    /* console.log("OOOOF");
     axios.get('http://localhost8081/status').then(response => {
       console.log(response);
-    }).catch(error => console.log("yikes mate " + error));
+    }).catch(error => console.log("yikes mate " + error)); */
 
     // console.log("what the fuuuuuuuuck?: "+ash);
     const { data } = await axios.get(`https://localhost8081/refresh_token?refresh_token=${getLocalRefreshToken()}`);
@@ -97,8 +97,7 @@ export const logout = () => {
   window.localStorage.removeItem('spotify_token_timestamp');
   window.localStorage.removeItem('spotify_access_token');
   window.localStorage.removeItem('spotify_refresh_token');
-  // line below caused error during logout
-  // window.location.reload();
+  window.location.reload(); // all access token info is removed from the server and page is reloaded
 };
 
 // Spotify API calls--------------------------------------

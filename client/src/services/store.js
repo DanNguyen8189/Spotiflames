@@ -52,6 +52,15 @@ export default new Vuex.Store({
     setTimePeriod (state, data) {
       console.log("time period setter:" + data);
       state.timePeriod = data;
+    },
+    clearAll (state) {
+      state.user = null;
+      state.topArtistsShort = null;
+      state.topArtistsMedium = null;
+      state.topArtistsLong = null;
+      state.topTracksShort = null;
+      state.topTracksMedium = null;
+      state.topTracksLong = null;      
     }
   },
   getters: {

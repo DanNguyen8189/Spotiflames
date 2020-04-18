@@ -10,8 +10,6 @@
         <p>Number of followers: {{ this.user.followers.total }}</p>
         <p>
           <a v-on:click="logOut()" class="btn btn-primary">Log out</a>
-          <a v-on:click="goTopArtists()">Top artists</a>
-          <a v-on:click="goTopTracks()">Top tracks</a>
         </p>
       </template>
       <template v-else>
@@ -56,12 +54,6 @@ export default {
         // this.$store.commit('setUser', response.user);
         this.$store.commit('setUser', response.data);
       });
-    },
-    goTopArtists () {
-      this.$router.push('/topartists')
-    },
-    goTopTracks () {
-      this.$router.push('/toptracks')
     }
   },
   created () {

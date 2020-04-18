@@ -8,7 +8,7 @@ import Home from "@/components/Home";
 // import { accessToken } from "@/services/spotifyApi";
 import TopArtists from "@/components/TopArtists";
 import TopTracks from "@/components/TopTracks";
-
+import { getUser } from "../services/spotifyApi";
 Vue.use(Router);
 // TODO change isAuthenticated
 // const isAuthenticated = false;
@@ -71,4 +71,21 @@ const router = new Router({
     return next("/spotifylogin");
   } else return next();
 }); */
+/* router.beforeEach((to, from, next) => {
+  if (to.fullPath === '/') {
+    return next();
+  }
+  console.log("OOOOF");
+  getUser().then((response) => {
+    // this.$store.commit('setUser', response.user);
+    console.log("BeforeEach route guard check");
+    if (!response) {
+      console.log("BeforeEach route guard check failure");
+      return next("/");
+    }
+  });
+  console.log("BeforeEach route guard");
+  return next();
+}); */
+
 export default router;

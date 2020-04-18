@@ -63,15 +63,6 @@ export default {
     goTopTracks () {
       this.$router.push('/toptracks')
     }
-    /* getTopArtistsShort2 () {
-      console.log("what the fuck");
-      getTopArtistsShort().then((response) => {
-        // this.$store.commit('setArtistsShort', response.data);
-        console.log("topartistsshort:");
-        console.log(response.data);
-        console.log(this.$store.state.topArtistsShort);
-      });
-    } */
   },
   created () {
     /* console.log("Home on create hook");

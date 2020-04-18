@@ -62,6 +62,7 @@ export const getAccessToken = () => {
     console.log("user hasn't logged in");
     return;
   } */
+
   if (error) {
     console.error(error);
     refreshAccessToken();

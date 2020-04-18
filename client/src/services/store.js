@@ -6,8 +6,9 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     user: null, // used by Home.vue to store basic user information
-    timePeriod: null, // used by TopArtists.vue and TopTracks.vue to determine which set of artists to display
-    // all of the below are in JSON format
+    timePeriod: null, // set by TopArtists.vue and TopTracks.vue to determine which set of artists to display
+    // The getters use this to determine which set of artists and tracks to return
+    // all of the below are in JSON format.
     topArtistsShort: null, // list of top artists from the past month
     topArtistsMedium: null, // list of top artists from the past 6 months
     topArtistsLong: null, // list of top artists all time

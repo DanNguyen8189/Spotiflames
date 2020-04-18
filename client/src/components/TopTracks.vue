@@ -20,6 +20,8 @@
       </div>
     </template>
     <template v-else>
+    <!--This is here because the data from spotify doesn't come fast enough
+    for the above template to render right away-->
         <h1>loading...</h1>
     </template>
   </div>
@@ -101,5 +103,8 @@ h1 {
 }
 .artist-name {
     color: orange;
+}
+button {
+  cursor: pointer; /* changes the cursor to the hand cursor on hover */
 }
 </style>

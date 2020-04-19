@@ -58,7 +58,7 @@ export default {
         console.log("Tracks response data:");
         console.log(response)
         this.$store.commit('setTopTracks', response);
-        this.$store.commit('setTimePeriod', 'short');
+        // this.$store.commit('setTimePeriod', 'short');
       });
     },
     /** function to change the time period to display */

@@ -54,7 +54,7 @@ export default {
         console.log("artists response data:");
         console.log(response)
         this.$store.commit('setTopArtists', response);
-        this.$store.commit('setTimePeriod', 'short');
+        // this.$store.commit('setTimePeriod', 'short');
       });
     },
     /** change the time period to display */

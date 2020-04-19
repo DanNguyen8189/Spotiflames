@@ -38,8 +38,8 @@ const refreshAccessToken = async () => {
 
 // called on app start
 export const getAccessToken = () => {
-  /* console.log("getAccessToken called");
-  window.localStorage.removeItem('spotify_token_timestamp');
+  console.log("getAccessToken called");
+  /* window.localStorage.removeItem('spotify_token_timestamp');
   window.localStorage.removeItem('spotify_access_token');
   window.localStorage.removeItem('spotify_refresh_token');
   return; */
@@ -49,7 +49,7 @@ export const getAccessToken = () => {
   const error = hashParams.error;
   const accessToken = hashParams.access_token;
   const refreshToken = hashParams.refresh_token;
-  console.log("get hashparams return: " + hashParams.access_token);
+  // console.log("get hashparams return: " + hashParams.access_token);
 
   /* if (hashParams.access_token === undefined || !getLocalAccessToken()) {
     console.log("user hasn't logged in");
@@ -90,7 +90,9 @@ export const logout = () => {
   window.localStorage.removeItem('spotify_token_timestamp');
   window.localStorage.removeItem('spotify_access_token');
   window.localStorage.removeItem('spotify_refresh_token');
-  window.location.reload(); // all access token info is removed from the server and page is reloaded
+  // window.location.href("http://localhost:8080");
+  window.location.assign("http://localhost:8080"); // Go back to home page without the hash params
+  // window.location.reload(); // all access token info is removed from the server and page is reloaded
 };
 
 // Spotify API calls--------------------------------------

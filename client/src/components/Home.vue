@@ -41,10 +41,10 @@ export default {
   methods: {
     /** logs user out by removing them from the store and removing the locally stored tokens */
     logOut () {
-      this.$store.commit('setUser', null);
+      this.$store.commit('clearAll');
       removeTokens();
       // console.log("removed tokens");
-      window.alert("logged out");
+      // window.alert("logged out");
       this.$router.push({name: 'Home'});
       // this.$router.go();
     },

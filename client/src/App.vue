@@ -3,7 +3,7 @@
     <!--<img src="./assets/logo.png">-->
     <!--<SpotifyLogin v-if='accessToken'/>
     <HelloWorld/>-->
-    <Menu>
+    <Menu v-if="this.loggedIn">
       <a v-on:click="goHome()">
         <i class="fa fa-fw fa-star-o"></i>
         <span>Home</span>
@@ -35,6 +35,11 @@ export default {
   components: {
     Menu
   },
+  computed : {
+    loggedIn () {
+      return this.$store.getters.isLoggedIn
+    }
+  },
   methods: {
     goHome () {
       this.$router.push('/');
@@ -51,7 +56,7 @@ export default {
       removeTokens();
       // console.log("removed tokens");
       // window.alert("logged out");
-      this.$router.push({name: 'Home'});
+      // this.$router.push({name: 'Home'});
       // this.$router.go();
     }
   }

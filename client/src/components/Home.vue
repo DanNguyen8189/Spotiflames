@@ -70,9 +70,10 @@ export default {
       console.log("found tokens");
       // get access and refresh tokens from url
       console.log("access token found in home.vue: " + hashParams.access_token);
-      console.log("refresh token found in home.vue: " + hashParams.refresh_token); */
+      console.log("refresh token found in home.vue: " + hashParams.refresh_token);
       this.getUserInfo();
-    // }
+    } */
+    this.getUserInfo();
   }
 }
 </script>

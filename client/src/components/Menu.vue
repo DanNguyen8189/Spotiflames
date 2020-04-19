@@ -88,9 +88,9 @@ export default {
     openMenu () {
       this.$emit("openMenu");
       this.isSideBarOpen = true;
-      /*if (!this.noOverlay) {
+      /* if (!this.noOverlay) {
         document.body.classList.add("bm-overlay");
-      }*/
+      } */
       if (this.right) {
         this.$refs.sideNav.style.left = "auto";
         this.$refs.sideNav.style.right = "0px";

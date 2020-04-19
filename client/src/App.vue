@@ -4,22 +4,22 @@
     <!--<SpotifyLogin v-if='accessToken'/>
     <HelloWorld/>-->
     <Menu>
-            <a v-on:click="goHome()">
-                <i class="fa fa-fw fa-star-o"></i>
-                <span>Home</span>
-            </a>
-            <a v-on:click="goTopArtists()">
-                <i class="fa fa-fw fa-bell-o"></i>
-                <span>Top Artists</span>
-            </a>
-            <a v-on:click="goTopTracks()">
-                <i class="fa fa-fw fa-envelope-o"></i>
-                <span>Top Tracks</span>
-            </a>
-            <a v-on:click="logOut()">
-                <i class="fa fa-fw fa-envelope-o"></i>
-                <span>Log Out</span>
-            </a>
+      <a v-on:click="goHome()">
+        <i class="fa fa-fw fa-star-o"></i>
+        <span>Home</span>
+      </a>
+      <a v-on:click="goTopArtists()">
+        <i class="fa fa-fw fa-bell-o"></i>
+        <span>Top Artists</span>
+      </a>
+      <a v-on:click="goTopTracks()">
+        <i class="fa fa-fw fa-envelope-o"></i>
+        <span>Top Tracks</span>
+      </a>
+      <a v-on:click="logOut()">
+        <i class="fa fa-fw fa-envelope-o"></i>
+        <span>Log Out</span>
+      </a>
     </Menu>
     <router-view/>
   </div>
@@ -45,12 +45,12 @@ export default {
     goTopTracks () {
       this.$router.push('/toptracks');
     },
-        /** logs user out by removing them from the store and removing the locally stored tokens */
+    /** logs user out by removing them from the store and removing the locally stored tokens */
     logOut () {
       this.$store.commit('clearAll');
       removeTokens();
       // console.log("removed tokens");
-      window.alert("logged out");
+      // window.alert("logged out");
       this.$router.push({name: 'Home'});
       // this.$router.go();
     }

@@ -8,7 +8,7 @@ import Home from "@/components/Home";
 // import { accessToken } from "@/services/spotifyApi";
 import TopArtists from "@/components/TopArtists";
 import TopTracks from "@/components/TopTracks";
-import { getUser } from "../services/spotifyApi";
+// import { getUser } from "../services/spotifyApi";
 Vue.use(Router);
 // TODO change isAuthenticated
 // const isAuthenticated = false;
@@ -26,7 +26,7 @@ const router = new Router({
     /* {
       path: "/:tokens",
       name: "Home",
-      component: Home     
+      component: Home
     }, */
     {
       path: "/topartists",
@@ -41,8 +41,8 @@ const router = new Router({
     {
       path: "/:tokens",
       name: "Home",
-      component: Home     
-    },
+      component: Home
+    }
     /* {
       path: "/spotifylogin",
       name: "SpotifyLogin",

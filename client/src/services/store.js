@@ -60,7 +60,7 @@ export default new Vuex.Store({
       state.topArtistsLong = null;
       state.topTracksShort = null;
       state.topTracksMedium = null;
-      state.topTracksLong = null;      
+      state.topTracksLong = null;
     }
   },
   getters: {

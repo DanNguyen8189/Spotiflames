@@ -23,8 +23,8 @@ const refreshAccessToken = async () => {
       console.log(response);
     }).catch(error => console.log("yikes mate " + error)); */
 
-    // console.log("what the fuuuuuuuuck?: "+ash);
-    const { data } = await axios.get(`https://localhost8081/refresh_token?refresh_token=${getLocalRefreshToken()}`);
+    console.log("what the fuuuuuuuuck?: ");
+    const { data } = await axios.get(`https://localhost:8081/refresh_token?refresh_token=${getLocalRefreshToken()}`);
     // const { data } = await axios.get(`/refresh_token?refresh_token=${getLocalRefreshToken()}`);
     const { accessToken } = data;
     console.log("Acces token gotten from refresh: " + accessToken);
@@ -38,13 +38,6 @@ const refreshAccessToken = async () => {
 
 // called on app start
 export const getAccessToken = () => {
-  /**
-   * TODO
-   * Do we want to do this instead?
-   *                     headers: {
-                        'Authorization': 'Bearer ' + this.$route.query.access_token
-                    }
-   */
   /* console.log("getAccessToken called");
   window.localStorage.removeItem('spotify_token_timestamp');
   window.localStorage.removeItem('spotify_access_token');

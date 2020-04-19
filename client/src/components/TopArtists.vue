@@ -9,7 +9,7 @@
       <template v-if="this.userArtistsShort">
       <!--<img :src="this.user.images[0].url" alt="profile_picture" class="profile_pic">-->
         <!--<img :src="this.userArtistsShort.items[0].images[2].url" alt="artist_picture">-->
-        <div v-for="n in 20" :key="n" class="list">
+        <div v-for="n in 20" :key="n" class="list-item">
           <!--<img v-bind:src="`this.userArtistsShort.items[0].images[2].url`">-->
           <!--<img src="https://i.scdn.co/image/6c785e6be62ae82a5222578045439fc235086f64">-->
           <!--<img :src="this.userArtistsShort.items[0].images[2].url" alt="artist_picture">-->
@@ -86,7 +86,7 @@ h1 {
 #top button {
   cursor: pointer; /* changes the cursor to the hand cursor on hover */
 }
-.list{
+.list-item{
   display: inline-block;
   width: 20%;
   margin: 30px 0;
@@ -94,7 +94,7 @@ h1 {
 img {
   border-radius: 50%;
   display: inline-block;
-  border: 4px double #e42c6a;
+  border: .4em solid #e42c6a;
 }
 .artist-text{
   color: #fcd02c;

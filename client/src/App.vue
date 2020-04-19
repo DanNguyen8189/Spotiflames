@@ -35,7 +35,7 @@ export default {
   components: {
     Menu
   },
-  computed : {
+  computed: {
     loggedIn () {
       return this.$store.getters.isLoggedIn
     }
@@ -74,14 +74,14 @@ body {
 
 body {
   min-height: 100%;
-  background-color: #32064a;
+  background-color: #0a2b5c;
 }
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
+  color: white;
   margin-top: 60px;
 }
 

@@ -7,7 +7,8 @@
         <p>
           <a :href="this.user.external_urls.spotify">Link to your profile</a>
         </p>
-        <p>Number of followers: {{ this.user.followers.total }}</p>
+        <!--<p>Following: {{ this.user.followers.total }}</p>-->
+        <!--<p>Followers: {{ this.user.followers.total }}</p>-->
         <p>
           <a v-on:click="logOut()" class="btn btn-primary">Log out</a>
         </p>
@@ -15,7 +16,7 @@
       <template v-else>
         <h1>Spotifire</h1>
         <a href="http://localhost:8081/login" class="btn btn-primary">LOG IN WITH SPOTIFY</a><br>
-        <a href=# class="btn btn-primary">VIEW SAMPLE</a>>
+        <a href=# class="btn btn-primary">VIEW SAMPLE</a>
       </template>
     </div>
 </template>
@@ -53,6 +54,7 @@ export default {
       getUser().then((response) => {
         // this.$store.commit('setUser', response.user);
         this.$store.commit('setUser', response.data);
+        console.log(response.data);
       });
     }
   },
@@ -81,14 +83,15 @@ export default {
 <style scoped>
 img {
   border-radius: 50%;
-  width: 15%;
+  width: 14em;
+  border: .4em solid #e42c6a;
+  padding: .5em;
 }
 h1 {
   color: #fcd02c;
 }
-a {
-  min-width: 160px;
-  width: 20em;
+.btn-primary {
+  width: 12em;
   height: 4em;
   border-radius: 2em;
   background-color: #e56b1f;

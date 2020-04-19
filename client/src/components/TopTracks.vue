@@ -7,16 +7,18 @@
         <button v-on:click="changeTimePeriod('long')">All Time</button>
     </div>
     <template v-if="this.userTracksShort">
-      <div v-for="n in 50" :key="n" class="list">
-        <p>{{n}}</p>
+      <div v-for="n in 50" :key="n" @click.prevent="playTrack(n-1)" class="list-item">
+        <p class="track-number">{{n}}</p>
         <img :src=getImage(n-1)>
-        <div class='track-name'>{{ getTrackName(n-1) }}</div>
-        <div class='artist-name'>{{ getArtistName(n-1) }}</div>
-        <button v-if="getTrackURL(n-1) !== null" class="btn btn-primary btn-sm"
+        <div class = "track-artist-text">
+          <p class="track-name">{{ getTrackName(n-1) }}</p>
+          <p class="artist-name">{{ getArtistName(n-1) }}</p>
+        </div>
+        <button v-if="getTrackURL(n-1) !== null" class="btn btn-primary btn-sm play-button"
           @click.prevent="playTrack(n-1)">
           <span class="fa fa-play-circle-o">Arrow Placeholder</span>
         </button>
-        <button v-else class="btn btn-primary btn-sm">Preview not available</button>
+        <button v-else class="btn btn-primary btn-sm play-button">Preview not available</button>
       </div>
     </template>
     <template v-else>
@@ -98,13 +100,54 @@ export default {
 h1 {
   color: #ff741e;
 }
+#top {
+  display: block;
+}
+.list-item {
+  background-color: #335385;
+  margin: 1em 5%;
+  height: 5em;
+  -webkit-transition: background-color 0.5s;
+  -moz-transition:    background-color 0.5s;
+  -ms-transition:     background-color 0.5s;
+  -o-transition:      background-color 0.5s;
+  transition:         background-color 0.5s;
+}
+.list-item:hover {
+  background-color: #e42c69af;
+}
+.list-item .track-number {
+  float: left;
+  line-height: 3em;
+  margin-left: 2%;
+}
+.list-item img {
+  border-radius: 50%;
+  float: left;
+  margin-left: 2%;
+  margin-top: 0.5em;
+}
+.track-artist-text {
+  display: inline-block;
+  overflow: hidden;
+  width: 40%;
+}
 .track-name {
-    color: white;
+  color: white;
+  display: block;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden; /* need this for text-overflow property to work */
 }
 .artist-name {
-    color: orange;
+  color: orange;
+  display: block;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 }
-button {
+.play-button {
   cursor: pointer; /* changes the cursor to the hand cursor on hover */
+  float: right;
 }
 </style>

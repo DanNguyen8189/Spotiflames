@@ -122,10 +122,10 @@ h1 {
   transition:         background-color 0.5s;
 }
 .list-item:hover {
-  background-color: #e42c69af;
+  background-color: #b92557;
 }
 .list-item:hover .triangle-right {
-  border-left: 35px solid orange;
+  border-left: 35px solid #ff741e;
 }
 .list-item:hover .track-number {
   color: orange;

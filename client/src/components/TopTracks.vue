@@ -1,7 +1,7 @@
 <template>
   <div class='topartists'>
   <h1>Top Tracks</h1>
-    <div id = "top">
+    <div id = "button-container">
         <button v-on:click="changeTimePeriod('short')">Past Month</button>
         <button v-on:click="changeTimePeriod('medium')">Past 6 Months</button>
         <button v-on:click="changeTimePeriod('long')">All Time</button>
@@ -104,10 +104,8 @@ export default {
   max-width: 70em;
   margin: auto;
 }
-h1 {
-  color: #ff741e;
-}
-#top {
+
+.button-container {
   display: block;
 }
 .list-item {
@@ -146,6 +144,7 @@ h1 {
   float: left;
   margin-left: 2%;
   margin-top: 0.5em;
+  width: 4.01em;
 }
 .track-artist-text {
   display: inline-block;
@@ -158,6 +157,7 @@ h1 {
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden; /* need this for text-overflow property to work */
+  margin: 1.2em 0 0 0;
 }
 .artist-name {
   color: orange;
@@ -165,6 +165,7 @@ h1 {
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
+  margin: 0 0 0 0;
 }
 .play-button-area {
   float: right;

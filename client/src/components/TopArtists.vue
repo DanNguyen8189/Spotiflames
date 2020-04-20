@@ -1,12 +1,13 @@
 <template>
-    <div class='topartists'>
+    <div class="topartists">
       <h1>Top Artists</h1>
-      <div id = "top">
+      <div class="buttoon-container">
         <button v-on:click="changeTimePeriod('short')">Past Month</button>
         <button v-on:click="changeTimePeriod('medium')">Past 6 Months</button>
         <button v-on:click="changeTimePeriod('long')">All Time</button>
       </div>
       <template v-if="this.userArtistsShort">
+        <div class="track-list-container">
       <!--<img :src="this.user.images[0].url" alt="profile_picture" class="profile_pic">-->
         <!--<img :src="this.userArtistsShort.items[0].images[2].url" alt="artist_picture">-->
         <div v-for="n in getAmount()" :key="n" class="list-item">
@@ -16,6 +17,7 @@
           <!--<img :src="this.$store.state.topArtistsShort.items[0].images[2].url" alt="artist_picture">-->
           <img :src=getImage(n-1)>
           <div class='artist-text'>{{ getName(n-1) }}</div>
+        </div>
         </div>
       </template>
       <template v-else>
@@ -67,7 +69,7 @@ export default {
     },
     /** function to get artist image based on the page state */
     getImage (index) {
-      return this.$store.getters.getTopArtists.items[index].images[2].url;
+      return this.$store.getters.getTopArtists.items[index].images[1].url;
     },
     /** function to get artist name base on the page state */
     getName (index) {
@@ -81,26 +83,35 @@ export default {
 </script>
 
 <style scoped>
-h1 {
-  color: #ff741e;
-}
-#top {
+.button-container {
   display: block;
 }
-#top button {
+.button-container button {
   cursor: pointer; /* changes the cursor to the hand cursor on hover */
+}
+.track-list-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  max-width: 75em;
+  margin: auto;
 }
 .list-item{
   display: inline-block;
-  width: 20%;
-  margin: 30px 0;
+  margin: 2em 3%;
+  flex-basis: 10em;
+  flex-shrink: 4;
 }
-img {
+.list-item img {
   border-radius: 50%;
+  width: 100%;
   display: inline-block;
-  border: .4em solid #e42c6a;
+  border: .2em solid #e42c6a;
+  padding: 3%;
 }
-.artist-text{
+.list-item .artist-text{
   color: #fcd02c;
+  margin-top: 1em;
+  font-weight: 600;
 }
 </style>

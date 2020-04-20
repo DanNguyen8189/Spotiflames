@@ -1,22 +1,26 @@
 <template>
     <div class='home'>
       <template v-if="this.user">
-        <h1>Hi there, {{ this.user.display_name }}</h1>
-        <img :src="this.user.images[0].url" alt="profile_picture" class="profile_pic">
-        <!--<p>Email address: {{ this.user.email }}</p>-->
-        <p>
-          <a :href="this.user.external_urls.spotify">Link to your profile</a>
-        </p>
-        <!--<p>Following: {{ this.user.followers.total }}</p>-->
-        <!--<p>Followers: {{ this.user.followers.total }}</p>-->
-        <p>
-          <a v-on:click="logOut()" class="btn btn-primary">Log out</a>
-        </p>
+        <div id="profile-page">
+          <h1>Hi,</h1>
+          <h1>{{ this.user.display_name }}</h1>
+          <a :href="this.user.external_urls.spotify">
+            <img :src="this.user.images[0].url" alt="profile_picture" class="profile_pic">
+          </a>
+          <!--<p>Email address: {{ this.user.email }}</p>-->
+          <!--<p>Following: {{ this.user.followers.total }}</p>-->
+          <!--<p>Followers: {{ this.user.followers.total }}</p>-->
+          <p>
+            <a v-on:click="logOut()" class="btn btn-primary">Log out</a>
+          </p>
+        </div>
       </template>
       <template v-else>
+        <div id="login-page">
         <h1>Spotifire</h1>
         <a href="http://localhost:8081/login" class="btn btn-primary">LOG IN WITH SPOTIFY</a><br>
         <a href=# class="btn btn-primary">VIEW SAMPLE</a>
+        </div>
       </template>
     </div>
 </template>
@@ -81,6 +85,16 @@ export default {
 </script>
 
 <style scoped>
+.home {
+  height: 100%;
+}
+#profile-page {
+  width: 100%;
+  transform: translateY(10%); /*vertically center*/
+}
+#login-page {
+  transform: translateY(50%); /*vertically center*/
+}
 img {
   border-radius: 50%;
   width: 14em;
@@ -91,6 +105,7 @@ h1 {
   color: #fcd02c;
 }
 .btn-primary {
+  cursor: pointer;
   border-radius: 2em;
   background-color: #e56b1f;
   display: inline-block;
@@ -103,7 +118,7 @@ h1 {
   font-weight: 700;
   line-height: 4em;
 }
-a:focus, a:hover {
+.btn-primary:focus, .btn-primary:hover {
   background-color: #ff741e;
 }
 </style>>

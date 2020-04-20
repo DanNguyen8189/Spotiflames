@@ -64,6 +64,7 @@ export default {
 </script>
 
 <style>
+@import url('https://fonts.googleapis.com/css2?family=Nothing+You+Could+Do&display=swap');
 html,
 body {
   margin: 0;
@@ -74,7 +75,11 @@ body {
 
 body {
   min-height: 100%;
-  background-color: #0a2b5c;
+  /* background-color: #0a2b5c; */
+  background: linear-gradient(rgba(10, 43, 92, 0.60), rgba(10, 43, 92, 0.60)), url("./assets/background-sgabriel.jpg");
+  background-attachment: fixed;
+  background-size: cover;
+  background-position: center;
 }
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
@@ -83,12 +88,22 @@ body {
   text-align: center;
   color: white;
   margin-top: 60px;
+  width: 100%;
 }
-
+h1 {
+  color: #ff741e;
+  font-family: 'Nothing You Could Do', cursive;
+  font-size: 4em;
+}
 *,
 *:after,
 *:before {
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
+}
+@media screen and (max-width: 480px) {
+  h1 {
+    font-size: 2.5em;
+  }
 }
 </style>

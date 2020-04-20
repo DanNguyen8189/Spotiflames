@@ -1,13 +1,14 @@
 <template>
   <div class='topartists'>
   <h1>Top Tracks</h1>
-    <div id = "button-container">
-        <button v-on:click="changeTimePeriod('short')">Past Month</button>
-        <button v-on:click="changeTimePeriod('medium')">Past 6 Months</button>
-        <button v-on:click="changeTimePeriod('long')">All Time</button>
+    <div class= "timeperiod-button-container">
+        <button v-on:click="changeTimePeriod('short')" class="button"><span>Past Month</span></button>
+        <button v-on:click="changeTimePeriod('medium')" class="button"><span>Past 6 Months</span></button>
+        <button v-on:click="changeTimePeriod('long')" class="button"><span>All Time</span></button>
     </div>
     <template v-if="this.userTracksShort">
       <div v-for="n in getAmount()" :key="n" @click.prevent="playTrack(n-1)" class="list-item">
+        <span>
         <p class="track-number">{{n}}</p>
         <img :src=getImage(n-1)>
         <div class = "track-artist-text">
@@ -18,6 +19,7 @@
           @click.prevent="playTrack(n-1)">
         </div>
         <p v-else class="play-button-area preview-na">Preview N/A</p>
+        </span>
       </div>
     </template>
     <template v-else>
@@ -105,9 +107,6 @@ export default {
   margin: auto;
 }
 
-.button-container {
-  display: block;
-}
 .list-item {
   cursor: pointer; /* changes the cursor to the hand cursor on hover */
   background-color: #155479;

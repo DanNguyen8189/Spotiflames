@@ -76,7 +76,8 @@ body {
 body {
   min-height: 100%;
   /* background-color: #0a2b5c; */
-  background: linear-gradient(rgba(10, 43, 92, 0.60), rgba(10, 43, 92, 0.60)), url("./assets/background-sgabriel.jpg");
+  background: linear-gradient(rgba(10, 43, 92, 0.60), rgba(10, 43, 92, 0.60)), 
+  url("./assets/background-sgabriel.jpg"); /*background image + tint*/
   background-attachment: fixed;
   background-size: cover;
   background-position: center;
@@ -94,6 +95,22 @@ h1 {
   color: #ff741e;
   font-family: 'Nothing You Could Do', cursive;
   font-size: 4em;
+}
+.timeperiod-button-container {
+  margin-bottom: 3em;
+}
+.timeperiod-button-container button {
+  cursor: pointer;
+  outline: none;
+  background-color: transparent;
+  border: none;
+}
+.timeperiod-button-container button span {
+  line-height: .5em;
+  padding:  0 0 .3em 0;
+  border-bottom: 2px solid #ff741e;
+  font-size: 1.2em;
+  color: #ff741e
 }
 *,
 *:after,

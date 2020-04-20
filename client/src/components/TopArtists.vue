@@ -1,10 +1,10 @@
 <template>
     <div class="topartists">
       <h1>Top Artists</h1>
-      <div class="buttoon-container">
-        <button v-on:click="changeTimePeriod('short')">Past Month</button>
-        <button v-on:click="changeTimePeriod('medium')">Past 6 Months</button>
-        <button v-on:click="changeTimePeriod('long')">All Time</button>
+      <div class="timeperiod-button-container">
+        <button v-on:click="changeTimePeriod('short')"><span>Past Month</span></button>
+        <button v-on:click="changeTimePeriod('medium')"><span>Past 6 Months</span></button>
+        <button v-on:click="changeTimePeriod('long')"><span>All Time</span></button>
       </div>
       <template v-if="this.userArtistsShort">
         <div class="track-list-container">
@@ -83,12 +83,6 @@ export default {
 </script>
 
 <style scoped>
-.button-container {
-  display: block;
-}
-.button-container button {
-  cursor: pointer; /* changes the cursor to the hand cursor on hover */
-}
 .track-list-container {
   display: flex;
   flex-wrap: wrap;

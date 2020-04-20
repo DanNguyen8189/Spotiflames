@@ -7,18 +7,17 @@
         <button v-on:click="changeTimePeriod('long')">All Time</button>
     </div>
     <template v-if="this.userTracksShort">
-      <div v-for="n in 50" :key="n" @click.prevent="playTrack(n-1)" class="list-item">
+      <div v-for="n in getAmount()" :key="n" @click.prevent="playTrack(n-1)" class="list-item">
         <p class="track-number">{{n}}</p>
         <img :src=getImage(n-1)>
         <div class = "track-artist-text">
           <p class="track-name">{{ getTrackName(n-1) }}</p>
           <p class="artist-name">{{ getArtistName(n-1) }}</p>
         </div>
-        <button v-if="getTrackURL(n-1) !== null" class="btn btn-primary btn-sm play-button"
+        <div v-if="getTrackURL(n-1) !== null" class="play-button-area triangle-right"
           @click.prevent="playTrack(n-1)">
-          <span class="fa fa-play-circle-o">Arrow Placeholder</span>
-        </button>
-        <button v-else class="btn btn-primary btn-sm play-button">Preview not available</button>
+        </div>
+        <p v-else class="play-button-area preview-na">Preview N/A</p>
       </div>
     </template>
     <template v-else>
@@ -67,6 +66,10 @@ export default {
     changeTimePeriod (state) {
       this.$store.commit('setTimePeriod', state);
     },
+    /** function to get amount of tracks listed in this time period */
+    getAmount () {
+      return this.$store.getters.getTopTracks.total;
+    },
     /** function to get album cover image based on the page state */
     getImage (index) {
       return this.$store.getters.getTopTracks.items[index].album.images[2].url;
@@ -97,6 +100,10 @@ export default {
 }
 </script>
 <style scoped>
+.topartists {
+  max-width: 70em;
+  margin: auto;
+}
 h1 {
   color: #ff741e;
 }
@@ -104,7 +111,8 @@ h1 {
   display: block;
 }
 .list-item {
-  background-color: #335385;
+  cursor: pointer; /* changes the cursor to the hand cursor on hover */
+  background-color: #155479;
   margin: 1em 5%;
   height: 5em;
   -webkit-transition: background-color 0.5s;
@@ -116,10 +124,22 @@ h1 {
 .list-item:hover {
   background-color: #e42c69af;
 }
+.list-item:hover .triangle-right {
+  border-left: 35px solid orange;
+}
+.list-item:hover .track-number {
+  color: orange;
+}
 .list-item .track-number {
   float: left;
   line-height: 3em;
   margin-left: 2%;
+  color: #2f93c2;
+  -webkit-transition: color 0.5s;
+  -moz-transition:    color 0.5s;
+  -ms-transition:     color 0.5s;
+  -o-transition:      color 0.5s;
+  transition:         color 0.5s;
 }
 .list-item img {
   border-radius: 50%;
@@ -146,8 +166,25 @@ h1 {
   white-space: nowrap;
   overflow: hidden;
 }
-.play-button {
-  cursor: pointer; /* changes the cursor to the hand cursor on hover */
+.play-button-area {
   float: right;
+}
+.triangle-right {
+	/* width: 0;
+	height: 0; */
+  margin: 1.1em 1em 1.1em 2em;
+	border-top: 20px solid transparent;
+	border-left: 35px solid #0a2b5c;
+	border-bottom: 20px solid transparent;
+  -webkit-transition: border-left 0.5s;
+  -moz-transition:    border-left 0.5s;
+  -ms-transition:     border-left 0.5s;
+  -o-transition:      border-left 0.5s;
+  transition:         border-left 0.5s;
+}
+.preview-na {
+  width: 4em;
+  margin: 1.4em 1em 0 0.6em;
+  color: #2da9e2;
 }
 </style>

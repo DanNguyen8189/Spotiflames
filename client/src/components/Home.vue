@@ -91,18 +91,17 @@ h1 {
   color: #fcd02c;
 }
 .btn-primary {
-  width: 12em;
-  height: 4em;
   border-radius: 2em;
   background-color: #e56b1f;
-  display: block;
+  display: inline-block;
+  margin: auto;
+  margin-bottom: 1em;
+  padding: 0 2em;
   color: white;
   text-decoration: none;
   letter-spacing: 2px;
   font-weight: 700;
   line-height: 4em;
-  margin: auto;
-  margin-bottom: 1em;
 }
 a:focus, a:hover {
   background-color: #ff741e;

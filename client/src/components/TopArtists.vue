@@ -9,7 +9,7 @@
       <template v-if="this.userArtistsShort">
       <!--<img :src="this.user.images[0].url" alt="profile_picture" class="profile_pic">-->
         <!--<img :src="this.userArtistsShort.items[0].images[2].url" alt="artist_picture">-->
-        <div v-for="n in 20" :key="n" class="list-item">
+        <div v-for="n in getAmount()" :key="n" class="list-item">
           <!--<img v-bind:src="`this.userArtistsShort.items[0].images[2].url`">-->
           <!--<img src="https://i.scdn.co/image/6c785e6be62ae82a5222578045439fc235086f64">-->
           <!--<img :src="this.userArtistsShort.items[0].images[2].url" alt="artist_picture">-->
@@ -57,15 +57,19 @@ export default {
         // this.$store.commit('setTimePeriod', 'short');
       });
     },
-    /** change the time period to display */
+    /** function to change the time period to display */
     changeTimePeriod (state) {
       this.$store.commit('setTimePeriod', state);
     },
-    /** get artist image based on the page state */
+    /** function to get amount of artists listed for this time period */
+    getAmount () {
+      return this.$store.getters.getTopArtists.total;
+    },
+    /** function to get artist image based on the page state */
     getImage (index) {
       return this.$store.getters.getTopArtists.items[index].images[2].url;
     },
-    /** get artist name base on the page state */
+    /** function to get artist name base on the page state */
     getName (index) {
       return this.$store.getters.getTopArtists.items[index].name;
     }

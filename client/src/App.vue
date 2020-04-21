@@ -92,7 +92,7 @@ body {
   width: 100%;
 }
 h1 {
-  color: #ff741e;
+  color: #fcd02c;
   font-family: 'Nothing You Could Do', cursive;
   font-size: 4em;
 }

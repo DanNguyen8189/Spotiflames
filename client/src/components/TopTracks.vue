@@ -109,8 +109,8 @@ export default {
 
 .list-item {
   cursor: pointer; /* changes the cursor to the hand cursor on hover */
-  background-color: #155479;
-  margin: 1em 5%;
+  background-color: #165479; /* 155479 */
+  margin: 0.5em 5%;
   height: 5em;
   -webkit-transition: background-color 0.5s;
   -moz-transition:    background-color 0.5s;
@@ -159,7 +159,7 @@ export default {
   margin: 1.2em 0 0 0;
 }
 .artist-name {
-  color: orange;
+  color: rgba(255, 255, 255, 0.40);
   display: block;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -186,5 +186,32 @@ export default {
   width: 4em;
   margin: 1.4em 1em 0 0.6em;
   color: #2da9e2;
+}
+@media screen and (max-width: 480px) {
+  .list-item {
+    margin: .25em 5%;
+    height: 4.5em;
+  }
+  .list-item .track-number {
+    float: left;
+    line-height: 2em;
+    margin-left: 2%;
+  }
+  .list-item img {
+    width: 3.609em;
+  }
+  .triangle-right {
+    margin: 1.25em 0.9em .99em 1.8em;
+    border-top: 15px solid transparent;
+    border-left: 26.25px solid #0a2b5c;
+    border-bottom: 15px solid transparent;
+  }
+  .list-item:hover .triangle-right {
+    border-left: 26.25px solid #ff741e;
+  }
+  .preview-na {
+    width: 3em;
+    margin: 1.05em 0.75em 0 0.45em;
+  }
 }
 </style>

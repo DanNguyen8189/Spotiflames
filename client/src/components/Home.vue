@@ -5,7 +5,7 @@
           <h1>Hi,</h1>
           <h1>{{ this.user.display_name }}</h1>
           <a :href="this.user.external_urls.spotify">
-            <img :src="this.user.images[0].url" alt="profile_picture" class="profile_pic">
+            <img :src="this.user.images[0].url" alt="profile_picture" class="profile-pic">
           </a>
           <!--<p>Email address: {{ this.user.email }}</p>-->
           <!--<p>Following: {{ this.user.followers.total }}</p>-->
@@ -95,11 +95,7 @@ export default {
 #login-page {
   transform: translateY(30%); /*vertically center*/
 }
-#login-page h1 {
-  color: #fcd02c;
-}
 #profile-page h1 {
-  color: #e56b1f;
   font-size: 2.5em;
 }
 #profile-page h1:nth-child(1) {

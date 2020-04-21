@@ -99,6 +99,8 @@ export default {
 .list-item img {
   border-radius: 50%;
   width: 100%;
+  height: 10em;
+  object-fit: cover; /* keep aspect ratio */
   display: inline-block;
   border: .2em solid #e42c6a;
   padding: 3%;

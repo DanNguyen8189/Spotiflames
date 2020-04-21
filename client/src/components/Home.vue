@@ -11,15 +11,15 @@
           <!--<p>Following: {{ this.user.followers.total }}</p>-->
           <!--<p>Followers: {{ this.user.followers.total }}</p>-->
           <p>
-            <a v-on:click="logOut()" class="btn btn-primary">Log out</a>
+            <a v-on:click="logOut()" class="btn btn-primary">Log Out</a>
           </p>
         </div>
       </template>
       <template v-else>
         <div id="login-page">
-        <h1>Spotifire</h1>
-        <a href="http://localhost:8081/login" class="btn btn-primary">LOG IN WITH SPOTIFY</a><br>
-        <a href=# class="btn btn-primary">VIEW SAMPLE</a>
+          <h1>Spotifire</h1>
+          <a href="http://localhost:8081/login" class="btn btn-primary">LOG IN WITH SPOTIFY</a><br>
+          <a href=# class="btn btn-primary">VIEW SAMPLE</a>
         </div>
       </template>
     </div>
@@ -90,20 +90,33 @@ export default {
 }
 #profile-page {
   width: 100%;
-  transform: translateY(10%); /*vertically center*/
+  transform: translateY(5%); /*vertically center*/
 }
 #login-page {
-  transform: translateY(50%); /*vertically center*/
+  transform: translateY(30%); /*vertically center*/
+}
+#login-page h1 {
+  color: #fcd02c;
+}
+#profile-page h1 {
+  color: #e56b1f;
+  font-size: 2.5em;
+}
+#profile-page h1:nth-child(1) {
+  margin-bottom: 0;
+}
+#profile-page h1:nth-child(2) {
+  margin-top: 0;
 }
 img {
   border-radius: 50%;
   width: 14em;
   border: .4em solid #e42c6a;
   padding: .5em;
+  display: block;
+  margin: auto;
 }
-h1 {
-  color: #fcd02c;
-}
+
 .btn-primary {
   cursor: pointer;
   border-radius: 2em;
@@ -120,5 +133,16 @@ h1 {
 }
 .btn-primary:focus, .btn-primary:hover {
   background-color: #ff741e;
+}
+@media screen and (min-width: 480px) {
+  #profile-page {
+    transform: translateY(0%); /*vertically center*/
+  }
+  #profile-page h1 {
+    display: inline-block;
+  }
+  #profile-page h1:nth-child(2) {
+    margin-left: .5em;
+  }
 }
 </style>>

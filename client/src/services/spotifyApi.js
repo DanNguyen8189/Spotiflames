@@ -87,11 +87,13 @@ export const getAccessToken = () => {
       setLocalAccessToken(accessToken);
     }
   } 
-  else if (getLocalAccessToken()) {
+  else if (getLocalAccessToken() !== null) {
     console.log("getting local access token");
+    console.log(getLocalAccessToken());
     return getLocalAccessToken();
   }
-  else {
+  else if (accessToken){
+    console.log("setting local access token to hashparam: " + accessToken);
     setLocalAccessToken(accessToken);
   }
   // return localAccessToken;

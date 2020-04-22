@@ -1,12 +1,12 @@
 <template>
   <div class='topartists'>
   <h1>Top Tracks</h1>
-    <div class= "timeperiod-button-container">
-        <button v-on:click="changeTimePeriod('short')" class="button"><span>Past Month</span></button>
-        <button v-on:click="changeTimePeriod('medium')" class="button"><span>Past 6 Months</span></button>
-        <button v-on:click="changeTimePeriod('long')" class="button"><span>All Time</span></button>
-    </div>
     <template v-if="this.userTracksShort">
+      <div class= "timeperiod-button-container">
+          <button v-on:click="changeTimePeriod('short')" class="button"><span>Past Month</span></button>
+          <button v-on:click="changeTimePeriod('medium')" class="button"><span>Past 6 Months</span></button>
+          <button v-on:click="changeTimePeriod('long')" class="button"><span>All Time</span></button>
+      </div>      
       <div v-for="n in getAmount()" :key="n" @click.prevent="playTrack(n-1)" class="list-item">
         <span>
         <p class="track-number">{{n}}</p>
@@ -25,7 +25,23 @@
     <template v-else>
     <!--This is here because the data from spotify doesn't come fast enough
     for the above template to render right away-->
-        <h1>loading...</h1>
+        <div class="fire">
+          <div class="fire-left">
+            <div class="main-fire"></div>
+            <div class="particle-fire"></div>
+          </div>
+          <div class="fire-main">
+            <div class="main-fire"></div>
+            <div class="particle-fire"></div>
+          </div>
+          <div class="fire-right">
+            <div class="main-fire"></div>
+            <div class="particle-fire"></div>
+          </div>
+          <div class="fire-bottom">
+            <div class="main-fire"></div>
+          </div>
+        </div>
     </template>
   </div>
 </template>
@@ -170,12 +186,12 @@ export default {
   float: right;
 }
 .triangle-right {
-	/* width: 0;
-	height: 0; */
+  /* width: 0;
+  height: 0; */
   margin: 1.1em 1em 1.1em 2em;
-	border-top: 20px solid transparent;
-	border-left: 35px solid #0a2b5c;
-	border-bottom: 20px solid transparent;
+  border-top: 20px solid transparent;
+  border-left: 35px solid #0a2b5c;
+  border-bottom: 20px solid transparent;
   -webkit-transition: border-left 0.5s;
   -moz-transition:    border-left 0.5s;
   -ms-transition:     border-left 0.5s;

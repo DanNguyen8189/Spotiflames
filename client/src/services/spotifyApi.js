@@ -48,7 +48,7 @@ export const getAccessToken = () => {
   const hashParams = getHashParams();
   const error = hashParams.error;
   const accessToken = hashParams.access_token;
-  const refreshToken = hashParams.refresh_token;
+  // const refreshToken = hashParams.refresh_token;
   // console.log("get hashparams return: " + hashParams.access_token);
 
   /* if (hashParams.access_token === undefined || !getLocalAccessToken()) {
@@ -56,32 +56,46 @@ export const getAccessToken = () => {
     return;
   } */
 
+  /*
   if (error) {
     console.error(error);
     refreshAccessToken();
   }
 
-  // If token has expired
   if (Date.now() - getTokenTimestamp() > EXPIRATION_TIME) {
     console.warn('Access token has expired, refreshing...');
     refreshAccessToken();
-  }
+  } */
 
-  const localAccessToken = getLocalAccessToken();
-  const localRefreshToken = getLocalRefreshToken();
+  // const localAccessToken = getLocalAccessToken();
+  // const localRefreshToken = getLocalRefreshToken();
 
   // If there is no REFRESH token in local storage, set it as `refresh_token` from params
-  if (!localRefreshToken || localRefreshToken === 'undefined') {
+  /* if (!localRefreshToken || localRefreshToken === 'undefined') {
     setLocalRefreshToken(refreshToken);
-  }
+  } */
 
   // If there is no ACCESS token in local storage, set it and return `access_token` from params
-  if (!localAccessToken || localAccessToken === 'undefined') {
+  /* if (!localAccessToken || localAccessToken === 'undefined') {
     setLocalAccessToken(accessToken);
     return accessToken;
-  }
+  } */
 
-  return localAccessToken;
+  if (getLocalAccessToken() && Date.now() - getTokenTimestamp() > EXPIRATION_TIME) {
+    console.warn('Access token has expired');
+    if (accessToken){
+      setLocalAccessToken(accessToken);
+    }
+  } 
+  else if (getLocalAccessToken()) {
+    console.log("getting local access token");
+    return getLocalAccessToken();
+  }
+  else {
+    setLocalAccessToken(accessToken);
+  }
+  // return localAccessToken;
+  return accessToken;
 }
 export const token = getAccessToken();
 

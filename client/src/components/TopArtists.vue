@@ -1,13 +1,13 @@
 <template>
     <div class="topartists">
       <h1>Top Artists</h1>
-      <div class="timeperiod-button-container">
-        <button v-on:click="changeTimePeriod('short')"><span>Past Month</span></button>
-        <button v-on:click="changeTimePeriod('medium')"><span>Past 6 Months</span></button>
-        <button v-on:click="changeTimePeriod('long')"><span>All Time</span></button>
-      </div>
-      <template v-if="this.userArtistsShort">
+      <template v-if=false>
         <div class="track-list-container">
+          <div class="timeperiod-button-container">
+            <button v-on:click="changeTimePeriod('short')"><span>Past Month</span></button>
+            <button v-on:click="changeTimePeriod('medium')"><span>Past 6 Months</span></button>
+            <button v-on:click="changeTimePeriod('long')"><span>All Time</span></button>
+          </div>
       <!--<img :src="this.user.images[0].url" alt="profile_picture" class="profile_pic">-->
         <!--<img :src="this.userArtistsShort.items[0].images[2].url" alt="artist_picture">-->
         <div v-for="n in getAmount()" :key="n" class="list-item">
@@ -23,7 +23,23 @@
       <template v-else>
       <!--This is here because the data from spotify doesn't come fast enough
       for the above template to render right away-->
-        <h1>loading...</h1>
+        <div class="fire">
+          <div class="fire-left">
+            <div class="main-fire"></div>
+            <div class="particle-fire"></div>
+          </div>
+          <div class="fire-main">
+            <div class="main-fire"></div>
+            <div class="particle-fire"></div>
+          </div>
+          <div class="fire-right">
+            <div class="main-fire"></div>
+            <div class="particle-fire"></div>
+          </div>
+          <div class="fire-bottom">
+            <div class="main-fire"></div>
+          </div>
+        </div>
       </template>
     </div>
 </template>

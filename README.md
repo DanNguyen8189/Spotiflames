@@ -1,5 +1,6 @@
 # Spotifire
 *Old version of application - new one can be found at https://github.com/DanNguyen8189/hotspotify
+
 *client-side specific and server-side specific instructions located in their respective folders
 
 Setup and run: 
